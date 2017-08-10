@@ -1,10 +1,14 @@
 
-package exercises;
+package exercises.string;
 
 /**
  * One Away: There are three types of edits that can be performed on strings: insert a character, remove a character, or
- * replace a character. Given two strings, write a function to check if they are one edit (or zero edits) away. EXAMPLE
- * pale, ple true pales, pale -> true pale, bale -> true pale, bae -> false
+ * replace a character. Given two strings, write a function to check if they are one edit (or zero edits) away.<br>
+ * EXAMPLE <br>
+ * pale, ple true <br>
+ * pales, pale -> true <br>
+ * pale, bale -> true <br>
+ * pale, bae -> false
  *
  * @author emanno
  * @version 1.0 Apr 19, 2017
@@ -20,10 +24,10 @@ public class OneAway {
 		if ( s1.length() == s2.length() ) {
 			System.out.println( unit.oneEditReplace( s1, s2 ) );
 		}
-		else if ( s1.length() == s2.length() - 1 ) {
+		else if ( s1.length() == s2.length() - 1 ) { // can I insert one char in s1 to make it s2?
 			System.out.println( unit.oneEditInsert( s1, s2 ) );
 		}
-		else if ( s1.length() == s2.length() + 1 ) {
+		else if ( s1.length() == s2.length() + 1 ) { // can I insert one char in s2 to make it s1?
 			System.out.println( unit.oneEditInsert( s2, s1 ) );
 		}
 

@@ -1,5 +1,5 @@
 
-package exercises;
+package exercises.string;
 
 /**
  * Prints all permutations of a string

@@ -1,6 +1,12 @@
 
 package exercises.matrix;
 
+/**
+ * Write an algorithm such that if an element in an NxM matrix is 0, its entire row and column are set to 0.
+ * 
+ * @author emanno
+ * @version 1.0 Aug 10, 2017
+ */
 public class ZeroMatrix {
 
 	public static void main ( String[] args ) {
@@ -18,7 +24,10 @@ public class ZeroMatrix {
 		m[ 2 ][ 1 ] = 8;
 		m[ 2 ][ 2 ] = 0;
 
+		RotateMatrix.printMatrix( m );
 		unit.setZeroes( m );
+		System.out.println();
+		RotateMatrix.printMatrix( m );
 	}
 
 
@@ -36,8 +45,6 @@ public class ZeroMatrix {
 			}
 		}
 
-		RotateMatrix.printMatrix( m );
-
 		// switch to zero
 		for ( int i = 0; i < rows.length; i++ ) {
 			if ( rows[ i ] ) {
@@ -54,9 +61,6 @@ public class ZeroMatrix {
 			}
 		}
 
-		System.out.println();
-
-		RotateMatrix.printMatrix( m );
 
 	}
 

@@ -1,5 +1,5 @@
 
-package exercises;
+package exercises.string;
 
 public class ReverseString {
 
