@@ -16,6 +16,8 @@ public class FirstCommonAncestor {
 
 	public static void main ( String[] args ) {
 		/*
+		 * @formatter:off
+		 *
 		 *           6
 		 *         /   \
 		 *        7     9
@@ -33,14 +35,22 @@ public class FirstCommonAncestor {
 		TreeNode node_7 = new TreeNode( 7, new TreeNode( 1 ), new TreeNode( 15 ) );
 		TreeNode root = new TreeNode( 6, node_7, node_9 );
 
+		System.out.println( firstCommonAncestor_usingAdditonalDataStructures( root, node_7, node_3 ).data ); // result: 6
+		System.out.println( firstCommonAncestor_usingAdditonalDataStructures( root, node_21, node_9 ).data ); // result: 9
+		System.out.println( firstCommonAncestor_usingAdditonalDataStructures( root, node_7, new TreeNode( 32 ) ) ); // result:
+
+		System.out.println();
+
 		System.out.println( firstCommonAncestor( root, node_7, node_3 ).data ); // result: 6
 		System.out.println( firstCommonAncestor( root, node_21, node_9 ).data ); // result: 9
 		System.out.println( firstCommonAncestor( root, node_7, new TreeNode( 32 ) ) ); // result: null
 
 	}
 
+	/** implementation that uses additional data structures */
 
-	public static TreeNode firstCommonAncestor ( TreeNode root, TreeNode nodeA, TreeNode nodeB ) {
+	public static TreeNode firstCommonAncestor_usingAdditonalDataStructures ( TreeNode root, TreeNode nodeA,
+			TreeNode nodeB ) {
 		if ( nodeA.equals( nodeB ) )
 			return nodeA;
 
@@ -52,19 +62,19 @@ public class FirstCommonAncestor {
 			// don't have a common ancestor
 			return null;
 
-		TreeNode prev = null;
+		TreeNode commonAncestor = null;
 		while ( !pathToNodeA.isEmpty() && !pathToNodeB.isEmpty() ) {
 			// both nodes are in the tree
 			TreeNode nA = pathToNodeA.pop();
 			TreeNode nB = pathToNodeB.pop();
 
 			if ( nA.equals( nB ) )
-				prev = nA;
+				commonAncestor = nA;
 			else
 				break;
 		}
 
-		return prev;
+		return commonAncestor;
 	}
 
 
@@ -93,6 +103,45 @@ public class FirstCommonAncestor {
 
 		// node not found
 		return null;
+	}
+
+	/** implementation that doesn't use additional data structures */
+
+	public static TreeNode firstCommonAncestor ( TreeNode startNode, TreeNode nodeA, TreeNode nodeB ) {
+		if ( !isInTree( startNode, nodeA ) || !isInTree( startNode, nodeB ) )
+			return null;
+
+		return findCommonAncestor( startNode, nodeA, nodeB );
+	}
+
+	private static TreeNode findCommonAncestor ( TreeNode startNode, TreeNode nodeA, TreeNode nodeB ) {
+		if ( startNode == nodeA || startNode == nodeB )
+			return startNode;
+
+		boolean isInLeftSubtree_A = isInTree( startNode.leftChild, nodeA );
+		boolean isInLeftSubtree_B = isInTree( startNode.leftChild, nodeB );
+
+		if ( isInLeftSubtree_A != isInLeftSubtree_B ) {
+			return startNode; // found common ancestor
+		}
+
+		if ( isInLeftSubtree_A ) {
+			return firstCommonAncestor( startNode.leftChild, nodeA, nodeB ); // look in left subtree
+		}
+		else {
+			return firstCommonAncestor( startNode.rightChild, nodeA, nodeB ); // look in right subtree
+		}
+	}
+
+
+	private static boolean isInTree ( TreeNode startNode, TreeNode node ) {
+		if ( startNode == null )
+			return false; // we are at the end of a branch and node wasn't found
+
+		if ( startNode == node )
+			return true; // node found
+
+		return isInTree( startNode.leftChild, node ) || isInTree( startNode.rightChild, node );
 	}
 
 }

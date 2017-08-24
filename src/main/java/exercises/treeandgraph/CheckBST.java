@@ -1,6 +1,12 @@
 
 package exercises.treeandgraph;
 
+/**
+ * Implement a function to check if a binary tree is a binary search tree.
+ * 
+ * @author emanno
+ * @version 1.0 Aug 21, 2017
+ */
 public class CheckBST {
 
 	public static void main ( String[] args ) {

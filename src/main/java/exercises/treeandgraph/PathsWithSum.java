@@ -6,6 +6,11 @@ import java.util.Map;
 
 import exercises.treeandgraph.TreeNode.NodeType;
 
+/**
+ * You are given a binary tree in which each node contains an integer value (which might be positive or negative).
+ * Design an algorithm to count the number of paths that sum to a given value. The path does not need to start or end at
+ * the root or a leaf, but it must go downwards (traveling only from parent nodes to child nodes).
+ */
 public class PathsWithSum {
 
 	public static void main ( String[] args ) {
@@ -42,12 +47,6 @@ public class PathsWithSum {
 	}
 
 
-	/**
-	 * You are given a binary tree in which each node contains an integer value (which might be positive or negative).
-	 * Design an algorithm to count the number of paths that sum to a given value. The path does not need to start or end at the
-	 * root or a leaf, but it must go downwards (traveling only from parent nodes to child nodes).
-	 *
-	 */
 	public static int countPathsWithSum ( TreeNode node, int targetSum ) {
 		return countPathsWithSum( node, targetSum, 0, new HashMap<>() );
 	}
