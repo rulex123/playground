@@ -4,6 +4,7 @@ package exercises.array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  * Given k sorted arrays, merge them into a single sorted array
@@ -26,6 +27,7 @@ public class MergeSortedArrays {
 		} );
 
 		System.out.println( Arrays.toString( mergeArrays( input ) ) );
+		System.out.println( Arrays.toString( mergeArrays_usingPriorityQueue( input ) ) );
 
 	}
 
@@ -65,7 +67,53 @@ public class MergeSortedArrays {
 
 
 	public static Integer[] mergeArrays_usingPriorityQueue ( List<int[]> arrays ) {
-		return null;
+		PriorityQueue<QueueElement> queue = new PriorityQueue<>();
+		List<Integer> result = new ArrayList<>();
+
+		for ( int i = 0; i < arrays.size(); i++ ) {
+			int[] currArray = arrays.get( i );
+			if ( currArray != null && currArray.length > 0 ) {
+				queue.add( new QueueElement( currArray[ 0 ], i, 0 ) );
+			}
+		}
+
+		while ( !queue.isEmpty() ) {
+			QueueElement element = queue.poll();
+			result.add( element.value ); // add min value to result array
+			int[] containerArray = arrays.get( element.indexOfContainerArray );
+			if ( element.indexOfValueInContainerArray + 1 < containerArray.length ) { // check for the next element from the
+																																								// same array
+				int value = containerArray[ element.indexOfValueInContainerArray + 1 ];
+				queue.add(
+						new QueueElement( value, element.indexOfContainerArray, (element.indexOfValueInContainerArray + 1) ) );
+			}
+		}
+
+		return result.toArray( new Integer[0] );
+	}
+
+	static class QueueElement implements Comparable<QueueElement> {
+		private final int value;
+		private final int indexOfContainerArray;
+		private final int indexOfValueInContainerArray;
+
+
+		public QueueElement ( int value, int indexOfContainerArray, int indexOfValueInContainerArray ) {
+			super();
+			this.value = value;
+			this.indexOfContainerArray = indexOfContainerArray;
+			this.indexOfValueInContainerArray = indexOfValueInContainerArray;
+		}
+
+
+		@Override
+		public int compareTo ( QueueElement otherNode ) {
+			if ( this.value < otherNode.value )
+				return -1;
+			if ( this.value > otherNode.value )
+				return 1;
+			return 0;
+		}
 	}
 
 }
