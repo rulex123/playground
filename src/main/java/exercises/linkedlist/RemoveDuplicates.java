@@ -28,13 +28,11 @@ public class RemoveDuplicates {
 
 		head = new Node( 1 );
 		head.appendToTail( 1 );
-		head.appendToTail( 1 );
+		head.appendToTail( 2 );
 		head.appendToTail( 2 );
 		head.appendToTail( 3 );
 		head.appendToTail( 3 );
 		head.appendToTail( 4 );
-		head.appendToTail( 5 );
-		head.appendToTail( 6 );
 
 		System.out.println( "Removing duplicates from sorted list" );
 		DeleteMiddleNode.printLinkedList( head );
@@ -88,7 +86,8 @@ public class RemoveDuplicates {
 			}
 
 			if ( slowPointer.next != fastPointer ) { // duplicates were detected
-				slowPointer.next = fastPointer.next;
+				slowPointer.next = fastPointer;
+				slowPointer = slowPointer.next;
 				fastPointer = fastPointer.next;
 			}
 			else { // no duplicates
