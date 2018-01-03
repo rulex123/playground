@@ -65,10 +65,7 @@ public class RemoveDuplicates {
 
 
 	/**
-	 * Given a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the
-	 * original list. <br>
-	 * For example, Given 1->2->3->3->4->4->5, return 1->2->5. <br>
-	 * Given 1->1->1->2->3, return 2->3.
+	 * Removes duplicates from a sorted linked list
 	 */
 	public static Node removeDuplicates_sorted ( Node head ) {
 		if ( head == null || head.next == null )
@@ -99,4 +96,38 @@ public class RemoveDuplicates {
 		return preHead.next;
 	}
 
+
+	/**
+	 * Given a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the
+	 * original list. <br>
+	 * For example, Given 1->2->3->3->4->4->5, return 1->2->5. <br>
+	 * Given 1->1->1->2->3, return 2->3.
+	 */
+	public static Node removeDuplicatesWithATwist ( Node head ) {
+		if ( head == null || head.next == null )
+			return head;
+
+		Node preHead = new Node( 0 );// doesn't matter what value we put in this node
+
+		Node fastPointer = head;
+		Node slowPointer = preHead;
+		slowPointer.next = head;
+
+		while ( fastPointer != null ) {
+			while ( fastPointer.next != null && fastPointer.data == fastPointer.next.data ) {
+				fastPointer = fastPointer.next; // move pointer to last node which is a duplicate
+			}
+
+			if ( slowPointer.next != fastPointer ) { // duplicates were detected
+				slowPointer.next = fastPointer.next;
+				fastPointer = fastPointer.next;
+			}
+			else { // no duplicates
+				fastPointer = fastPointer.next;
+				slowPointer = slowPointer.next;
+			}
+		}
+
+		return preHead.next;
+	}
 }
