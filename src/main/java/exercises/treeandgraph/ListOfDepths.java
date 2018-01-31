@@ -8,18 +8,24 @@ import java.util.List;
 
 import exercises.treeandgraph.TreeNode.NodeType;
 
+/**
+ * Given a binary tree, design an algorithm which creates a linked list of all the nodes at each depth (i.e. if you have
+ * a tree with depth D, you'll have D linked lists)
+ *
+ * @author emanno
+ * @version 1.0 Jan 31, 2018
+ */
 public class ListOfDepths {
 
 	public static void main ( String[] args ) {
 
 		/*
-		 *           8
-		 *         /   \
-		 *        4     9
-		 *       / \     \
-		 *      2   6     11
-		 *
-		 */
+		*           8
+		*         /   \
+		*        4     9
+		*       / \     \
+		*      2   6     11
+		*/
 		TreeNode node_4 = new TreeNode( 4, new TreeNode( 2 ), new TreeNode( 6 ) );
 		TreeNode node_9 = new TreeNode( 9, new TreeNode( 11 ), NodeType.RIGHT );
 		TreeNode root = new TreeNode( 8, node_4, node_9 );

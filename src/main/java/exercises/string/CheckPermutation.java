@@ -2,7 +2,7 @@
 package exercises.string;
 
 /**
- * Given two strings, write a method to decide whether if one is a permutation of the other.
+ * Given two strings, write a method to decide if one is a permutation of the other.
  *
  * @author emanno
  * @version 1.0 Aug 4, 2017

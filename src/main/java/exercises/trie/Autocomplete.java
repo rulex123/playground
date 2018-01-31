@@ -1,5 +1,5 @@
 
-package exercises.matrix;
+package exercises.trie;
 
 import java.util.ArrayList;
 import java.util.Arrays;

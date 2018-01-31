@@ -37,7 +37,7 @@ public class FirstCommonAncestor {
 
 		System.out.println( firstCommonAncestor_usingAdditonalDataStructures( root, node_7, node_3 ).data ); // result: 6
 		System.out.println( firstCommonAncestor_usingAdditonalDataStructures( root, node_21, node_9 ).data ); // result: 9
-		System.out.println( firstCommonAncestor_usingAdditonalDataStructures( root, node_7, new TreeNode( 32 ) ) ); // result:
+		System.out.println( firstCommonAncestor_usingAdditonalDataStructures( root, node_7, new TreeNode( 32 ) ) ); // result: null
 
 		System.out.println();
 
