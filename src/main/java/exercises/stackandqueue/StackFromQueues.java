@@ -4,18 +4,18 @@ package exercises.stackandqueue;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Implement a stack using two queues
+ *
+ * @author emanno
+ * @version 1.0 Jul 11, 2017
+ */
 public class StackFromQueues {
 
 	public static class EmptyStackException extends RuntimeException {
 		private static final long serialVersionUID = 2116305097722419575L;
 	}
 
-	/**
-	 * Implement a stack using two queues
-	 *
-	 * @author emanno
-	 * @version 1.0 Jul 11, 2017
-	 */
 	public static class StackFromTwoQueues {
 		private Queue<Integer> queue_1 = new LinkedList<>();
 		private Queue<Integer> queue_2 = new LinkedList<>();

@@ -40,7 +40,7 @@ public class StackMin {
 
 
 	public int pop () {
-		if ( this.toString() == null ) {
+		if ( this.top == null ) {
 			throw new NullPointerException();
 		}
 
@@ -53,7 +53,7 @@ public class StackMin {
 
 
 	public int peek () {
-		if ( this.toString() == null ) {
+		if ( this.top == null ) {
 			throw new NullPointerException();
 		}
 
@@ -62,7 +62,7 @@ public class StackMin {
 
 
 	public int min () {
-		if ( this.toString() == null ) {
+		if ( this.top == null ) {
 			throw new NullPointerException();
 		}
 
