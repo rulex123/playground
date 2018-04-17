@@ -45,6 +45,12 @@ public class FirstCommonAncestor {
 		System.out.println( firstCommonAncestor( root, node_21, node_9 ).data ); // result: 9
 		System.out.println( firstCommonAncestor( root, node_7, new TreeNode( 32 ) ) ); // result: null
 
+		System.out.println();
+
+		System.out.println( findCommonAncestor_optimized( root, node_7, node_3 ).data ); // result: 6
+		System.out.println( findCommonAncestor_optimized( root, node_21, node_9 ).data ); // result: 9
+		System.out.println( findCommonAncestor_optimized( root, node_7, new TreeNode( 32 ) ) ); // result: null
+
 	}
 
 	/** implementation that uses additional data structures */
@@ -143,5 +149,33 @@ public class FirstCommonAncestor {
 
 		return isInTree( startNode.leftChild, node ) || isInTree( startNode.rightChild, node );
 	}
+
+	/** optimized implementation that doesn't use any additional data structures*/
+	public static TreeNode findCommonAncestor_optimized(TreeNode startNode, TreeNode nodeA, TreeNode nodeB) {
+		if ( !isInTree( startNode, nodeA ) || !isInTree( startNode, nodeB ) )
+			return null;
+
+		return firstCommonAncestor_optimized( startNode, nodeA, nodeB );
+	}
+
+	private static TreeNode firstCommonAncestor_optimized( TreeNode startNode, TreeNode nodeA, TreeNode nodeB ) {
+		if ( startNode == null )
+			return null;
+
+		if ( startNode == nodeA || startNode == nodeB )
+			return startNode;
+
+		TreeNode fcaFromLeftSubtree = firstCommonAncestor_optimized( startNode.leftChild, nodeA, nodeB );
+		TreeNode fcaFromRightSubtree = firstCommonAncestor_optimized( startNode.rightChild, nodeA, nodeB );
+
+		if ( fcaFromLeftSubtree == null && fcaFromRightSubtree == null )
+			return null;
+
+		if ( fcaFromLeftSubtree != null && fcaFromRightSubtree != null )
+			return startNode;
+
+		return fcaFromLeftSubtree!= null ? fcaFromLeftSubtree : fcaFromRightSubtree;
+	}
+
 
 }
