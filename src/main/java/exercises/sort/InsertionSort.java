@@ -3,6 +3,12 @@ package exercises.sort;
 
 import java.util.Arrays;
 
+/**
+ * Given an array of intergers, sort it in ascending order using the Insertion Sort algorithm
+ *
+ * @author emanno
+ * @version 1.0 Feb 4, 2018
+ */
 public class InsertionSort {
 
 	public static void main ( String[] args ) {
@@ -16,6 +22,5 @@ public class InsertionSort {
 
 		System.out.print( Arrays.toString( inputArray ) );
 	}
-
 
 }

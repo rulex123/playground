@@ -3,6 +3,12 @@ package exercises.sort;
 
 import java.util.Arrays;
 
+/**
+ * Given an array of integers, sort it in ascending order using the Selection Sort algorithm
+ *
+ * @author emanno
+ * @version 1.0 Feb 4, 2018
+ */
 public class SelectionSort {
 
 	public static void main ( String[] args ) {
