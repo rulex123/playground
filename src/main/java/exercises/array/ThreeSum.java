@@ -29,7 +29,6 @@ public class ThreeSum {
 		}
 	}
 
-
 	public static Set<List<Integer>> threeSum_sorting ( int[] nums ) {
 		Set<List<Integer>> triplets = new HashSet<>();
 		Arrays.sort( nums );
