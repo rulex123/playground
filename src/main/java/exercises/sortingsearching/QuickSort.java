@@ -1,5 +1,5 @@
 
-package exercises.sort;
+package exercises.sortingsearching;
 
 import java.util.Arrays;
 import java.util.Random;

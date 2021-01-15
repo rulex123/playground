@@ -1,7 +1,7 @@
 
 package exercises.array;
 
-import exercises.sort.Utils;
+import exercises.sortingsearching.Utils;
 
 /**
  * Given an array with elements, can you sort this array in ascending order using only one of the following operations?

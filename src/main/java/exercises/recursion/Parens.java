@@ -27,7 +27,7 @@ public class Parens {
 		if ( noOfRemainingOpenParens < 0 || noOfRemainingClosedParens < noOfRemainingOpenParens )
 			return;
 
-		if ( noOfRemainingOpenParens == 00 && noOfRemainingClosedParens == 0 ) {
+		if ( noOfRemainingOpenParens == 0 && noOfRemainingClosedParens == 0 ) {
 			result.add( String.copyValueOf( parensStore ) );
 			return;
 		}

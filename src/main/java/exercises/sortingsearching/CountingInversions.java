@@ -1,5 +1,5 @@
 
-package exercises.sort;
+package exercises.sortingsearching;
 
 /**
  * Inversion Count for an array indicates – how far (or close) the array is from being sorted. If array is already

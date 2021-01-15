@@ -14,14 +14,14 @@ import java.util.List;
  * @author emanno
  * @version 1.0 Apr 26, 2017
  */
-public class SetOfStacks<T> {
+public class StackOfPlates<T> {
 
 	private final int threshold;
 
 	List<MyStack<T>> listOfStacks = new ArrayList<>();
 
 
-	public SetOfStacks ( int threshold ) {
+	public StackOfPlates(int threshold ) {
 		super();
 		this.threshold = threshold;
 	}

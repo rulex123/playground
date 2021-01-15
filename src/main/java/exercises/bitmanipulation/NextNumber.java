@@ -2,7 +2,8 @@
 package exercises.bitmanipulation;
 
 /**
- * Given a positive integer, print the next smallest and the next largest number that have the same number of 1 bits in
+ * Given a positive integer, print the next smallest and the next largest number that have the same
+ * number of 1 bits in
  * their binary representation.
  *
  * @author emanno
@@ -10,80 +11,93 @@ package exercises.bitmanipulation;
  */
 public class NextNumber {
 
-	public static void main ( String[] args ) {
-		// nextNumber( 13948 ); // 0b11011001111100
-		System.out.println( 0xD );
-		// System.out.println( Integer.toBinaryString( 0xaa ) );
-	}
+  public static void main(String[] args) {
+    for (int i = 1; i <= 100; i++) {
+      nextNumber(i);
+    }
+  }
 
 
-	public static void nextNumber ( int num ) {
-		if ( num < 1 )
-			throw new IllegalArgumentException( "input number must be positive" );
+  static void nextNumber(int num) {
+    if (num <= 0) {
+      throw new IllegalArgumentException("input number must be a positive integer!");
+    }
+    System.out.println( nextSmallestNumber(num) + "<-" + num + "->" + nextLargestNumber(num));
+  }
 
-		System.out.println( "next bigger number is " + getBiggerNumber( num ) );
-		System.out.println( "previous smaller number is " + getSmallerNumber( num ) );
+  static int nextSmallestNumber(int num) {
+    int onesCounter = 0;
+    while ((num & 1) != 0) {
+      onesCounter++;
+      num = num >>> 1;
+    }
 
-	}
+    if (num == 0) {
+      // original number was something like 00..0011..11, so there is no way to get a smaller
+      // number with the same number of bits set
+      return -1;
+    }
 
+    int zerosCounter = 0;
+    while ((num & 1) != 1) {
+      zerosCounter++;
+      num = num >>> 1;
+    }
 
-	public static int getSmallerNumber ( int num ) {
+    // clear all bits up to (zerosCounter + onesCounter)
+    num = num << (zerosCounter + onesCounter);
 
-		int c = num;
-		int c0 = 0;
-		int c1 = 0;
+    // clear the bit right after (zerosCounter + onesCounter)
+    int mask = ~(1 << (zerosCounter + onesCounter));
+    num = num & mask;
 
-		while ( (c & 1) == 1 ) {
-			c1++;
-			c = c >> 1;
-		}
+    // set the bit at the end of (zerosCounter + onesCounter)
+    mask = 1 << (onesCounter + zerosCounter - 1);
+    num = num | mask;
 
-		// if input number is 00..0011..11 then there is no smaller number with the same number of ones
-		if ( c == 0 )
-			return -1;
+    // move any remaining bits that were set by shifting them to the left as much as possible
+    if (onesCounter > 0) {
+      for (int i = 1; i <= onesCounter; i++) {
+        mask = 1 << (zerosCounter + onesCounter - 1 - i);
+        num = num | mask;
+      }
+    }
 
-		while ( (c & 1) == 0 ) {
-			c0++;
-			c = c >> 1;
-		}
+    return num;
+  }
 
-		int mask = (~0) << (c0 + c1 + 1);
-		num = num & mask; // clear bits up to position (c0+c1+1)
-		mask = (1 << (c1 + 1)) - 1;
-		mask = mask << (c0 - 1);
-		num = num | mask; // set following (c1 + 1) bits to 1
-		return num;
-	}
+  static int nextLargestNumber(int num) {
+    // count how many bits are not set (starting from LSB)
+    int zerosCounter = 0;
+    while ((num & 1) != 1) {
+      zerosCounter++;
+      num = num >>> 1;
+    }
 
+    // count how many bits are set (starting from LSB)
+    int onesCounter = 0;
+    while ((num & 1) != 0) {
+      onesCounter++;
+      num = num >>> 1;
+    }
 
-	public static int getBiggerNumber ( int num ) {
+    if (zerosCounter + onesCounter == 31) {
+      return -1;
+    }
 
-		int c = num;
-		int c0 = 0;
-		int c1 = 0;
+    // now all the bits that were set up to (zerosCounter + onesCounter) are cleared
+    num = num << (zerosCounter + onesCounter);
+    // now set a bit after (zerosCounter + onesCounter)
+    int mask = 1 << (zerosCounter + onesCounter);
+    num = num | mask;
 
-		while ( (c & 1) == 0 ) {
-			c0++;
-			c = c >> 1;
-		}
-
-		while ( (c & 1) == 1 ) {
-			c1++;
-			c = c >> 1;
-		}
-
-		// if input number is 11..1100..00 then there is no bigger number with the same number of ones
-		if ( c0 + c1 == 31 )
-			return -1;
-
-		int mask = 1 << (c0 + c1);
-		num = num | mask; // flip right-most non trailing zero bit
-		mask = ~((1 << (c0 + c1)) - 1);
-		num = num & mask; // clear all bits to the right of (c0+c1)
-		mask = (1 << (c1 - 1)) - 1;
-		num = num | mask; // insert (c1-1) ones on the right
-
-		return num;
-	}
+    // if there were any other bits set, set them
+    if (onesCounter > 1) {
+      mask = 1 << (onesCounter - 1);
+      mask -= 1; // to flip from e.g. 1000 to 0111
+      num = num | mask;
+    }
+    return num;
+  }
 
 }

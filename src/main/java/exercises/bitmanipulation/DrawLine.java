@@ -4,9 +4,12 @@ package exercises.bitmanipulation;
 import java.io.IOException;
 
 /**
- * A monochrome screen is stored as a single array of bytes, allowing eight consecutive pixels to be stored in one byte.
- * The screen has width w, where w is divisible by 8 (that is, no byte will be split across rows). The height of the
- * screen, of course, can be derived from the length of the array and the width. Implement a function that draws a
+ * A monochrome screen is stored as a single array of bytes, allowing eight consecutive pixels to be
+ * stored in one byte.
+ * The screen has width w, where w is divisible by 8 (that is, no byte will be split across rows).
+ * The height of the
+ * screen, of course, can be derived from the length of the array and the width. Implement a
+ * function that draws a
  * horizontal line from (x1,y) to (x2,y). The method signature should look something like: <br>
  * <code>drawLine(byte[] screen, int width, int x1, int x2, int y)</code>
  *
@@ -15,78 +18,115 @@ import java.io.IOException;
  */
 public class DrawLine {
 
-	public static void main ( String[] args ) throws IOException {
-		byte[] screen = new byte[] {
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-		};
+  public static void main(String[] args) {
+    byte[] screen = new byte[12];
+    drawLine(screen, 32, 5, 29, 2);
+    System.out.println("--------");
+    printScreen(screen);
+  }
 
-		// drawLine( screen, 24, 3, 19, 2 );
-		// drawLine( screen, 24, 10, 15, 3 );
-		drawLine( screen, 32, 5, 29, 2 );
-		printScreen( screen );
+  static void drawLine(byte[] screen, int width, int x1, int x2, int y) {
+    // defend against bad screen or width
+    if (screen == null || screen.length == 0 || width % 8 != 0) {
+      return;
+    }
 
-	}
+    // derive the height of the screen
+    int height = calculateHeightOfScreen(screen, width);
 
+    // validate the y input param
+    if (y < 1 || y > height) {
+      throw new IllegalArgumentException("invalid value for y!");
+    }
 
-	/**
-	 * @param screen
-	 *        single array representing the screen
-	 * @param width
-	 *        width of the screen (in number of bits)
-	 * @param x1
-	 *        x-coordinate where the horizontal line should start (starts at 1)
-	 * @param x2
-	 *        x-coordinate where the horizontal line should end (starts at 1)
-	 * @param y
-	 *        y-coordinate where the horizontal line should be drawn (starts at 1)
-	 */
-	public static void drawLine ( byte[] screen, int width, int x1, int x2, int y ) {
-		if ( x2 < x1 )
-			return; // invalid input param, do nothing
+    // translate y to a range of indices in the screen array
+    int[] indexes = calculateIndexes(y, height, screen);
+    int minIndex = indexes[0];
+    int maxIndex = indexes[1];
 
-		// calculate height of screen
-		int bytesPerRow = width / Byte.SIZE;
-		int height = screen.length / bytesPerRow;
+    boolean startedLine = false;
+    boolean finishedLine = false;
 
-		if ( y > height )
-			return; // invalid input param, do nothing
+    for (int i = minIndex, counter = 0; i <= maxIndex; i++, counter++) {
+      // calculate the range of pixels we are dealing with
+      int minPixel = 8 * counter + 1;
+      int maxPixel = minPixel + 8 - 1;
 
-		int firstByteIndex = (x1 / Byte.SIZE) + (bytesPerRow * (y - 1));
-		int lastByteIndex = (x2 / Byte.SIZE) + (bytesPerRow * (y - 1));
+      // check if we are done
+      if (startedLine && finishedLine) {
+        break;
+      }
 
-		byte startLineMask = (byte) (0xFF >> (x1 % Byte.SIZE) - 1);
-		byte endLineMask = (byte) ~(0xFF >> (x2 % Byte.SIZE));
+      // check if line starts and ends at current index
+      if (isWithin(x1, minPixel, maxPixel) && isWithin(x2, minPixel, maxPixel)) {
+        int maskA = (1 << maxPixel - x1 + 1) - 1;
+        int maskB = 0xFF << (maxPixel - x2);
+        screen[i] = (byte) (maskA & maskB);
+        startedLine = true;
+        finishedLine = true;
+        continue;
+      }
 
-		if ( firstByteIndex == lastByteIndex ) { // x1 and x2 are in the same byte
-			screen[ firstByteIndex ] |= ((byte) (startLineMask & endLineMask));
-		}
-		else {
-			if ( lastByteIndex - firstByteIndex > 1 ) { // x1 and x2 are far enough that entire bytes can be set in between
-				for ( int i = firstByteIndex + 1; i < lastByteIndex; i++ ) {
-					setByte( screen, i );
-				}
-			}
+      // check if line starts at current index
+      if (isWithin(x1, minPixel, maxPixel)) {
+        startedLine = true;
+        int mask = (1 << (maxPixel - x1 + 1)) - 1;
+        screen[i] = (byte) (screen[i] | mask);
+        continue;
+      }
 
-			// set first byte of horizontal line
-			screen[ firstByteIndex ] |= startLineMask;
+      // check if line ends at current index
+      if (isWithin(x2, minPixel, maxPixel)) {
+        finishedLine = true;
+        screen[i] = (byte) 0xFF;
+        screen[i] = (byte) (screen[i] << (maxPixel - x2));
+        continue;
+      }
 
-			// set last byte of horizontal line
-			screen[ lastByteIndex ] |= endLineMask;
+      // otherwise flip all the bits for current index
+      screen[i] = (byte) 0xFF;
+    }
+  }
 
-		}
+  private static int[] calculateIndexes(final int y, final int height,
+                                        final byte[] screen) {
+    // first, we need to know how many bytes correspond to one line of the screen
+    int bytesPerLIne = screen.length / height;
 
-	}
+    // then, we need to identify all the indices
+    int startIndex = (y - 1) * bytesPerLIne;
+    int endIndex = startIndex + bytesPerLIne - 1;
+    return new int[]{ startIndex, endIndex };
+  }
 
+  private static int calculateHeightOfScreen(final byte[] screen, final int width) {
+    return screen.length / (width / 8);
+  }
 
-	private static void setByte ( byte[] screen, int index ) {
-		screen[ index ] = (byte) 0xFF;
-	}
+  static void printScreen(byte[] screen) {
+    StringBuilder sb = new StringBuilder();
+    for (byte byteInScreen : screen) {
+      if (byteInScreen == 0) {
+        sb.append("00000000");
+        sb.append("\n");
+      } else {
+        int result = byteInScreen & 0xFF;
+        String string = Integer.toBinaryString(result);
+        for (int i = 0; i < (8 - string.length()); i++) {
+          sb.append("0");
+        }
+        sb.append(string);
+        sb.append("\n");
+      }
 
+    }
+    System.out.print(sb);
+  }
 
-	private static void printScreen ( byte[] screen ) {
-		for ( byte b : screen ) {
-			System.out.println( String.format( "%8s", Integer.toBinaryString( b & 0xFF ) ).replace( " ", "0" ) );
-		}
-	}
-
+  static boolean isWithin(int startLineAtPixel, int firstPixel, int lastPixel) {
+    if (startLineAtPixel >= firstPixel && startLineAtPixel <= lastPixel) {
+      return true;
+    }
+    return false;
+  }
 }

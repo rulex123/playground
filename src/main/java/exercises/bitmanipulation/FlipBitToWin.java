@@ -7,53 +7,71 @@ package exercises.bitmanipulation;
  * EXAMPLE <br>
  * input: 1775 (in binary 11011101111) <br>
  * output: 8
- *
- * @author emanno
- * @version 1.0 Jul 14, 2017
  */
 public class FlipBitToWin {
 
 	public static void main ( String[] args ) {
 		System.out.println( flipBitToWin( -1 ) ); // expected 32
+		System.out.println( flipBitToWin( 0 ) ); // expected 1
 		System.out.println( flipBitToWin( 0b11011101111 ) ); // expected 8
 		System.out.println( flipBitToWin( 0b111101110111 ) ); // expected 8
 		System.out.println( flipBitToWin( 0b1110011101111 ) ); // expected 8
-		System.out.println( flipBitToWin( 0 ) ); // expected 1
 	}
 
+	public static int flipBitToWin(int num) {
+    // edge cases
+    if (num == -1) {
+      return 32;
+    }
+    if (num == 0) {
+      return 1;
+    }
 
-	public static int flipBitToWin ( int num ) {
-		if ( num == ~0 )
-			return Integer.BYTES * 8; // max possible number of 1s
+    boolean terminate = false;
+    int currBit = 0;
+    int flipCount = 1;
+    int lastFlippedBit = -1;
+    int carryOver = 0;
+    int currLength = 0;
+    int maxLength = Integer.MIN_VALUE;
+    while (num > 0 || !terminate) {
+      // keep track of which bit we are looking at from the original number
+      currBit++;
+      // check if the LSB is set
+      if ((num & 1) == 1) {
+        // bit is set
+        // increment length of current sequence of 1s
+        currLength++;
+      } else {
+        // bit is not set
+        // can we flip the bit?
+        if (flipCount > 0) {
+          flipCount--;
+          currLength++;
+        } else {
+          // check if current sequence (including any carry over) is the longest seen so far
+          if (currLength + carryOver > maxLength) {
+            maxLength = currLength + carryOver;
+          }
+          // flip current bit and reset length of current sequence of 1s
+          flipCount = 0;
+          currLength = 1;
+          // set carry over
+          carryOver = currBit - lastFlippedBit - 1;
+        }
+        lastFlippedBit = currBit;
+      }
 
-		int currentLength = 0;
-		int prevLength = 0;
-		int maxLength = 1; // min possible number of 1s
+      if (num == 0) {
+        // we terminate once we have shifted all 1s in the original number to the right
+        // and taken into account a trailing zero
+        terminate = true;
+      } else {
+        num = num >>> 1;
+      }
+    }
 
-		while ( num != 0 ) {
-			if ( (num & 1) == 1 ) { // bit is 1
-				currentLength++;
-			}
-			else {
-				// bit is 0
-				// but is the following bit a 1 or 0?
-				if ( (num & 2) == 0 ) {
-					// following bit is 0
-					prevLength = 0;
-				}
-				else {
-					// following bit is 1
-					prevLength = currentLength;
-				}
-				currentLength = 0;
-			}
-			maxLength = Math.max( currentLength + prevLength + 1, maxLength );
-			num >>>= 1;
-		}
-
-		return maxLength;
-	}
-
-
+    return maxLength;
+  }
 
 }

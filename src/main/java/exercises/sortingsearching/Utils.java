@@ -1,5 +1,5 @@
 
-package exercises.sort;
+package exercises.sortingsearching;
 
 public class Utils {
 	public static void swap ( int[] array, int from, int to ) {

@@ -5,14 +5,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SetOfStacksTest {
+public class StackOfPlatesTest {
 
-	private SetOfStacks<Integer> unit;
+	private StackOfPlates<Integer> unit;
 
 
 	@Before
 	public void setUp () {
-		this.unit = new SetOfStacks<>( 2 );
+		this.unit = new StackOfPlates<>( 2 );
 		this.unit.push( 13 );
 		this.unit.push( -2 );
 

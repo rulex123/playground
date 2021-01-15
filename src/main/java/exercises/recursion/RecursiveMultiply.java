@@ -11,14 +11,17 @@ package exercises.recursion;
 public class RecursiveMultiply {
 
 	public static void main ( String[] args ) {
-		System.out.println( recursiveMultiply_linear( 16, 4 ) );
+		System.out.println( recursiveMultiply( 16, 4 ) );
+		System.out.println( iterativeMultiply( 16, 4 ) );
+
 	}
 
 
 	/*
-	 * Obvious implementation: linear time complexity, based on the smaller of the two input numbers
+	 * Recursive implementation: linear time complexity, based on the smaller of the two input
+	 * numbers
 	 */
-	private static int recursiveMultiply_linear ( int a, int b ) {
+	private static int recursiveMultiply( int a, int b ) {
 		if ( a == 0 || b == 0 ) {
 			return 0;
 		}
@@ -34,6 +37,31 @@ public class RecursiveMultiply {
 		int smaller = a < b ? a : b;
 		int bigger = a < b ? b : a;
 
-		return bigger + recursiveMultiply_linear( bigger, smaller - 1 );
+		return bigger + recursiveMultiply( bigger, smaller - 1 );
 	}
+
+	/**
+	 * Iterative implementation
+	 */
+	private static int iterativeMultiply(int a, int b) {
+		if (a == 0 || b == 0)
+			return 0;
+
+		if (a == 1)
+			return b;
+
+		if (b == 1)
+			return a;
+
+		int smaller = a < b ? a : b;
+		int bigger = a > b ? a : b;
+
+		int result = bigger;
+		for (int i = 0; i < smaller - 1; i++) {
+			result += bigger;
+		}
+
+		return result;
+	}
+
 }

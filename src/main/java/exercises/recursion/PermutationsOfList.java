@@ -1,6 +1,6 @@
 package exercises.recursion;
 
-import exercises.sort.Utils;
+import exercises.sortingsearching.Utils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

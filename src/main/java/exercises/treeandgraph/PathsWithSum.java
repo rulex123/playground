@@ -81,8 +81,8 @@ public class PathsWithSum {
 
 	private static void updateCountOfPath ( int key, Map<Integer, Integer> countOfPaths, int delta ) {
 		int newCount = countOfPaths.getOrDefault( key, 0 ) + delta;
-		if (newCount==0) {
-			// eliminate from hash map in case count goes to 0
+		if (newCount<=0) {
+			// eliminate from hash map in case count goes to 0 or less
 			countOfPaths.remove( key );
 		} else {
 			countOfPaths.put( key, newCount );

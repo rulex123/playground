@@ -15,8 +15,15 @@ public class PairwiseSwap {
 		System.out.println( Integer.toBinaryString( pairwiseSwap( 0b01100011 ) ) ); // expected 10010011
 	}
 
+	static int pairwiseSwap(int num) {
+		int leftShift = num << 1;
+		// preserve odd bits by masking with 1010...1010
+		int oddBits = leftShift & 0xAAAAAAAA;
 
-	public static int pairwiseSwap ( int num ) {
-		return ((num & 0xAAAAAAAA) >>> 1) | ((num & 0x55555555) << 1);
+		int rightShift = num >>> 1;
+		// preserve odd bits by masking with 0101...0101
+		int evenBits = rightShift & 0x55555555;
+
+		return oddBits | evenBits;
 	}
 }

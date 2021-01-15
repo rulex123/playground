@@ -33,11 +33,6 @@ public class AnimalShelter {
 		}
 
 
-		public Date getInTheShelterSince () {
-			return this.inTheShelterSince;
-		}
-
-
 		public void setInTheShelterSince ( Date since ) {
 			this.inTheShelterSince = since;
 		}
