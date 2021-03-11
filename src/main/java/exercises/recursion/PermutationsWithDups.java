@@ -48,7 +48,6 @@ public class PermutationsWithDups {
 				printPerms( charMap, prefix + c, remaining - 1, result );
 				charMap.put( c, count );
 			}
-
 		}
 	}
 

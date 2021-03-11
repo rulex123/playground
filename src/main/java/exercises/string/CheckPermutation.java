@@ -12,7 +12,6 @@ public class CheckPermutation {
 	public static void main ( String[] args ) {
 		System.out.println( checkPermuation( "god", "dog" ) );
 		System.out.println( checkPermuation( "clock", "table" ) );
-
 	}
 
 

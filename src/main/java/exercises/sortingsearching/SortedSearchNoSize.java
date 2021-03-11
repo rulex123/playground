@@ -10,63 +10,53 @@ package exercises.sortingsearching;
 public class SortedSearchNoSize {
 
   public static void main(String[] args) {
-    Listy listy = new Listy(1, 2, 4, 5);
-
+    Listy listy = new Listy(7, 15, 27, 34, 36, 42, 51, 66, 72, 90);
+    System.out.println(sortedSearchNoSize(listy, 51));
+    System.out.println(sortedSearchNoSize(listy, 27));
+    System.out.println(sortedSearchNoSize(listy, 90));
+    System.out.println(sortedSearchNoSize(listy, 7));
+    System.out.println(sortedSearchNoSize(listy, 111));
+    System.out.println(sortedSearchNoSize(listy, 1));
   }
 
   static int sortedSearchNoSize(Listy listy, int elem) {
-    if (listy == null) {
+    if (listy == null || listy.elementAt(0) == -1) {
       throw new IllegalArgumentException("invalid listy");
     }
-    if (elem < 0) {
-      throw new IllegalArgumentException("invalid elem");
+
+    int index = 1;
+    while (listy.elementAt(index) != -1 && listy.elementAt(index) < elem) {
+      // keep pushing the boundary until we either go too far or come across
+      // an element in listy that is bigger than what we are looking for
+      index = index * 2;
     }
 
-    int floor = 0;
-    int ceiling = 2;
-    int outOfBounds = -1;
+    return binarySearch(listy, elem, 0, index);
+  }
 
-    while (floor <= ceiling) {
-      int floorElem = listy.elementAt(floor);
-      int ceilingElem = listy.elementAt(ceiling);
-      int mid = (floor + ceiling) / 2;
+  private static int binarySearch(Listy listy, int elem, int start, int end) {
+    if (start > end) {
+      return -1; // elem is not in listy!
+    }
 
-      if (ceilingElem != -1) {
-        // we are within bounds
-        if (elem >= floorElem && elem <= ceilingElem) {
-          // we are in the right segment of listy
-          int midElem = listy.elementAt(mid);
-          if (midElem == elem) {
-            return mid;
-          } else if (elem < midElem) {
-            ceiling = mid - 1;
-            continue;
-          } else {
-            floor = mid + 1;
-            continue;
-          }
-        } else if (floor == 0 && elem < floorElem) {
-          return -1;
-        } else {
-          // keep looking for the right segment, paying attention to whether we already detected
-          // a limit in ceiling
-          if (outOfBounds != -1) {
-            ceiling = outOfBounds;
-          } else {
-            floor = ceiling;
-            ceiling = ceiling * 2;
-          }
-          continue;
-        }
+    int mid = (start + end) / 2;
+    int midElem = listy.elementAt(mid);
+
+    if (midElem == -1) {
+      // no choice but to search left half
+      return binarySearch(listy, elem, start, mid - 1);
+    } else {
+      if (midElem == elem) {
+        // found it!
+        return mid;
+      } else if (midElem > elem) {
+        // search left half
+        return binarySearch(listy, elem, start, mid - 1);
       } else {
-        // we are out of bounds, adjust ceiling to midway between floor and ceiling
-        outOfBounds = ceiling; // save out of bounds index for later
-        ceiling = (floor + ceiling) / 2; // readjust ceiling value
+        // search right half
+        return binarySearch(listy, elem, mid + 1, end);
       }
     }
-
-    // element not found!
-    return -1;
   }
 
   static class Listy {

@@ -22,7 +22,6 @@ public class ReverseLinkedList {
 		System.out.println( "----------" );
 
 		head = reverseLinkedListBetween( head, 3, 6 );
-
 		DeleteMiddleNode.printLinkedList( head );
 	}
 

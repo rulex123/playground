@@ -2,59 +2,66 @@
 package exercises.recursion;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * You have a stack of n boxes, with widths w1, w2, w3, etc. , heights h1, h2, h3, etc., depths d1,
+ * d2, d3, etc. The boxes cannot be rotated and can only be stacked on top of one another if each
+ * box in the stack is strictly larger than the box above it in width, height and depth.
+ * Implement a method to compute the height of the tallest possible stack. The height of a stack
+ * is the sum of the heights of each box.
+ */
 public class StackOfBoxes {
 
+
   public static void main(String[] args) {
+    Box[] boxes = new Box[3];
+    boxes[0] = new Box(100, 3, 54);
+    boxes[1] = new Box(200, 198, 55);
+    boxes[2] = new Box(12, 200, 102);
 
-    List<Box> boxes = new ArrayList<>();
-    boxes.add(new Box(100, 3, 54));
-    boxes.add(new Box(200, 198, 55));
-    boxes.add(new Box(12, 200, 102));
-//    boxes.add(new Box(1, 400, 1));
-
-    int result = stackOfBoxes(boxes, new Stack<>(), 0);
-    System.out.println(result);
+    System.out.println(stackOfBoxes(boxes));
   }
 
-  private static int stackOfBoxes(List<Box> lefOverBoxes, Stack<Box> stackedBoxes,
-                                  int heightSoFar) {
+  static int stackOfBoxes(Box[] boxes) {
+    if (boxes == null || boxes.length == 0) {
+      return 0;
+    }
+    Arrays.sort(boxes, ascending_width.reversed());
+    return stackOfBoxes(boxes, null, 0, new int[boxes.length]);
+  }
+
+  private static int stackOfBoxes(Box[] boxes, Box currentBottom, int offset, int[] cache) {
     // base case
-    if (lefOverBoxes.isEmpty()) {
-      return heightSoFar;
+    if (offset == boxes.length) {
+      return 0; // we are out of boxes!
     }
 
-    int currMax = Integer.MIN_VALUE;
-    // part of the algo that recurses
-    for (int i = 0; i < lefOverBoxes.size(); i++) {
-      Box currBox = lefOverBoxes.get(i);
-
-      // check if we have a valid stack
-      if (stackedBoxes.isEmpty() || stackedBoxes.peek().isLargerThan(currBox)) {
-        stackedBoxes.push(currBox);
-        heightSoFar += currBox.height;
-      }
-
-      List<Box> newLeftOverBoxes = new ArrayList<>();
-      newLeftOverBoxes.addAll(lefOverBoxes.subList(0, i));
-      newLeftOverBoxes.addAll(lefOverBoxes.subList(i + 1, lefOverBoxes.size()));
-
-      int height = stackOfBoxes(newLeftOverBoxes, stackedBoxes, heightSoFar);
-      if (height > currMax) {
-        currMax = height;
-      }
-
-      // undo change to the stack and continue
-      if (!stackedBoxes.isEmpty() && stackedBoxes.peek() == currBox) {
-        stackedBoxes.pop();
-        heightSoFar -= currBox.height;
+    // use offset to grab a new bottom for the stack
+    Box newBottom = boxes[offset];
+    int heightWithBottom = 0;
+    if (currentBottom == null || newBottom.canBeStackedAbove(currentBottom)) {
+      if (cache[offset] == 0) { // check if we have computed this combination already
+        // if not, compute the height of stack that uses the new bottom and insert into cache
+        heightWithBottom = stackOfBoxes(boxes, newBottom, offset + 1, cache);
+        heightWithBottom += newBottom.height;
+        cache[offset] = heightWithBottom;
+      } else {
+        // read from cache
+        heightWithBottom = cache[offset];
       }
     }
 
-    // need to return the max value stored in list of heights
-    return currMax;
+    // compute the height of stack that doesn't use the new bottom (i.e. maintain current bottom
+    // and increase offset)
+    int heightWithoutBottom = stackOfBoxes(boxes, currentBottom, offset + 1, cache);
+
+    // return bigger of two heights
+    return Math.max(heightWithoutBottom, heightWithBottom);
   }
 
   private static class Box {
@@ -76,11 +83,22 @@ public class StackOfBoxes {
              ",d=" + depth + "}";
     }
 
-    boolean isLargerThan(Box box) {
-      if (this.width > box.width && this.height > box.height && this.depth > box.depth) {
+    // returns true if this box can be stacked above the given box, false otherwise
+    boolean canBeStackedAbove(Box box) {
+      if (this.height < box.height && this.depth < box.depth) {
         return true;
       }
       return false;
     }
   }
+
+  static Comparator<Box> ascending_width = (b1, b2) -> {
+    if (b1.width > b2.width) {
+      return 1; // first box is greater (i.e. appears after)
+    } else if (b1.width < b2.width) {
+      return -1; // first box is smaller (i.e. appears before)
+    } else {
+      return 0;
+    }
+  };
 }

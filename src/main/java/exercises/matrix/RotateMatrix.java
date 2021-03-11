@@ -71,8 +71,10 @@ public class RotateMatrix {
 
 
 	public static void printMatrix ( int[][] m ) {
-		for ( int i = 0; i < m.length; i++ ) {
-			for ( int j = 0; j < m.length; j++ ) {
+		int rows = m.length;
+		int cols = m[0].length;
+		for ( int i = 0; i < rows; i++ ) {
+			for ( int j = 0; j < cols; j++ ) {
 				System.out.printf( "%5d ", m[ i ][ j ] );
 			}
 			System.out.println();
