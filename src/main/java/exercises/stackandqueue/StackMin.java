@@ -15,11 +15,9 @@ public class StackMin {
 		public int min;
 		public Node next;
 
-
 		public Node ( int data ) {
 			this.data = data;
 		}
-
 	}
 
 	private Node top;
