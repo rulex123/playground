@@ -3,6 +3,11 @@ package exercises.stackandqueue;
 import java.util.Arrays;
 import java.util.EmptyStackException;
 
+/**
+ * Implement N>0 stacks using a single array to store all stack data (you may use auxiliary
+ * arrays in your stack object, but all of the objects in all of the stacks must be in the same
+ * array). No stack should be full unless the entire array is full.
+ */
 public class NStacksUsingArray {
 
   public static void main(String[] args) {

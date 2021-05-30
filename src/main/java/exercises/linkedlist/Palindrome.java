@@ -50,7 +50,7 @@ public class Palindrome {
 		Stack<Integer> numsSeenSoFar = new Stack<>();
 		numsSeenSoFar.push( node.data );
 
-		Node midNode = null;
+		Node midNode;
 		while ( true ) {
 			curr = curr.next;
 			runner = runner.next.next;

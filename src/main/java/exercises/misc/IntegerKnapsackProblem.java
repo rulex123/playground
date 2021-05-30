@@ -20,7 +20,7 @@ public class IntegerKnapsackProblem {
 
 	public static void main ( String[] args ) {
 		List<Item> items = Arrays.asList( new Item( 1, 6 ), new Item( 2, 10 ), new Item( 3, 12 ) );
-		topDownKnapsack( items.toArray( new Item[0] ), 5 );
+		System.out.println(topDownKnapsack( items.toArray( new Item[0] ), 5 ));
 	}
 
 
@@ -66,8 +66,9 @@ public class IntegerKnapsackProblem {
 		if ( !cache.containsKey( i ) )
 			cache.put( i, new HashMap<Integer, Integer>() );
 		Integer cached = cache.get( i ).get( W );
-		if ( cached != null )
+		if ( cached != null ) {
 			return cached;
+		}
 
 		// If item is heavier than remaining weight, skip item
 		if ( W - items[ i ].weight < 0 )

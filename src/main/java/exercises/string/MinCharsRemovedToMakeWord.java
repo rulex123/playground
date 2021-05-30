@@ -104,7 +104,8 @@ public class MinCharsRemovedToMakeWord {
 
       // first, lookup the word in the dictionary
       if (dictionary.contains(word)) {
-        return original.length() - word.length();
+        return original.length() - word.length(); // best result is guaranteed by the fact that
+        // we use BFS (starting from removing 0 chars and degenerating from there)
       }
 
       // otherwise, compute next words and add them to queue

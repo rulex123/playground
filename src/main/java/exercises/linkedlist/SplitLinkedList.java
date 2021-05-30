@@ -47,7 +47,7 @@ public class SplitLinkedList {
 			runner = runner.next.next;
 		}
 
-		// curr now point to middle node: reset pointer to next element of curr
+		// curr now points to middle node: reset pointer to next element of curr
 		Node secondHalfPointer = curr.next;
 		curr.next = null;
 

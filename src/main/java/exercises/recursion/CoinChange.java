@@ -43,7 +43,7 @@ public class CoinChange {
     coinChange_optimalNoOfCoins_DP(30, new int[] {1, 5, 25});
   }
 
-  // constant time complexity
+  // linear time complexity
   private static void coinChange_optimalNoOfCoins(int change) {
     int[] coins = {25, 10, 5, 1};
     int remainder = change;

@@ -49,13 +49,8 @@ public class FractionalKnapsackProblem {
 
 
 	private static void sort ( List<Item> items ) {
-		Collections.sort( items, new Comparator<Item>()
-		{
-			@Override
-			public int compare ( Item itemA, Item itemB ) {
-				return new Double( itemB.valueToWeightRatio ).compareTo( new Double( itemA.valueToWeightRatio ) );
-			}
-		} );
+		Collections.sort( items,
+				(itemA, itemB) -> new Double( itemB.valueToWeightRatio ).compareTo( new Double( itemA.valueToWeightRatio ) ));
 	}
 
 	static class Item {
