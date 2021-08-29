@@ -7,14 +7,13 @@ package exercises.array;
 public class MedianOf2SortedArrays {
 
   public static void main(String[] args) {
-    int[] arr1 = new int[]{ 1, 4 };
-    int[] arr2 = new int[]{ 2, 6, 7 };
+    int[] arr1 = new int[]{ 1, 2, 4, 12 };
+    int[] arr2 = new int[]{ 3, 5, 7, 9, 11, 13, 15, 17, 19, 21 };
     System.out.println(median(arr1, arr2));
 
     arr1 = new int[]{ 1, 3, 7 };
     arr2 = new int[]{ 4, 10, 12 };
     System.out.println(median(arr1, arr2));
-
   }
 
   private static double median(int[] arr1, int[] arr2) {
@@ -37,7 +36,8 @@ public class MedianOf2SortedArrays {
 
       // get the 4 numbers situated around the partition points
       int leftArr1 = partition1 > 0 ? shortArray[partition1 - 1] : Integer.MIN_VALUE;
-      int rightArr1 = (partition1 == shortArray.length) ? Integer.MAX_VALUE : shortArray[partition1];
+      int rightArr1 =
+          (partition1 == shortArray.length) ? Integer.MAX_VALUE : shortArray[partition1];
       int leftArr2 = partition2 > 0 ? longArray[partition2 - 1] : Integer.MIN_VALUE;
       int rightArr2 = (partition2 == arr2.length) ? Integer.MAX_VALUE : longArray[partition2];
 
