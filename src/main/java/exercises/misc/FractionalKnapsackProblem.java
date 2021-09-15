@@ -3,7 +3,6 @@ package exercises.misc;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -49,8 +48,10 @@ public class FractionalKnapsackProblem {
 
 
 	private static void sort ( List<Item> items ) {
+//		Collections.sort( items,
+//				(itemA, itemB) -> new Double( itemB.valueToWeightRatio ).compareTo( new Double( itemA.valueToWeightRatio ) ));
 		Collections.sort( items,
-				(itemA, itemB) -> new Double( itemB.valueToWeightRatio ).compareTo( new Double( itemA.valueToWeightRatio ) ));
+				(itemA, itemB) -> Double.compare(itemB.valueToWeightRatio, itemA.valueToWeightRatio));
 	}
 
 	static class Item {

@@ -12,7 +12,7 @@ import java.util.Stack;
  *
  * Instead of routing texts through cell towers, your app sends messages via the phones of nearby
  * users, passing each message along from one phone to the next until it reaches the intended
- * recipient. (Don't worry—the messages are encrypted while they're in transit.)
+ * recipient. (Don't worry - the messages are encrypted while they're in transit.)
  *
  * Some friends have been using your service, and they're complaining that it takes a long time for
  * messages to get delivered. After some preliminary debugging, you suspect messages might not be

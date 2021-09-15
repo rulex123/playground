@@ -49,12 +49,12 @@ public class TwoEggProblem {
  * And if we went the other way and skipped 1 floor every time, we'd have the opposite problem!
  * What would the worst case floor be then?
  *
- * The worst case would be floor 98 or 99—the first egg would drop a large number of times
+ * The worst case would be floor 98 or 99 - the first egg would drop a large number of times
  * (at every floor from 2-100 skipping one floor each time) and the last egg would drop a small
  * number of times (only on floor 99), for a total of 51 drops.
  *
- * Can we balance this out? Is there some number between 50 and 1—the number of floors we'll skip
- * with each drop of the first egg—where the first and second eggs would drop close to the same
+ * Can we balance this out? Is there some number between 50 and 1 - the number of floors we'll skip
+ * with each drop of the first egg - where the first and second eggs would drop close to the same
  * number of times in the worst case?
  *
  * Yes, we could skip 10 floors each time. The worst case would again be floor 98 or 99, but

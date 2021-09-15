@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 /**
  * Given an integer representing a given amount of change, write a function to compute the total number of coins
- * required to make that amount of change. You can assume that there is always a 1¢ coin. <br>
+ * required to make that amount of change. You can assume that there is always a 1 cent coin. <br>
  * eg. (assuming American coins: 1, 5, 10, and 25 cents)<br>
  * makeChange(1) = 1 (1) <br>
  * makeChange(6) = 2 (5 + 1) <br>

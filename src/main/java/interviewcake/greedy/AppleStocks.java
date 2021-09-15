@@ -24,8 +24,8 @@ package interviewcake.greedy;
  * getMaxProfit(stockPrices);
  * // returns 6 (buying for $5 and selling for $11)
  *
- * No "shorting"—you need to buy before you can sell. Also, you can't buy and sell in the same time
- * step—at least 1 minute has to pass.
+ * No "shorting" - you need to buy before you can sell. Also, you can't buy and sell in the same time
+ * step - at least 1 minute has to pass.
  */
 public class AppleStocks {
 

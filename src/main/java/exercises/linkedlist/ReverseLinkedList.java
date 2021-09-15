@@ -29,7 +29,7 @@ public class ReverseLinkedList {
 	/**
 	 * Reverse a linked list from position m to n. Do it in-place and in one-pass. <br>
 	 * For example: Given 1->2->3->4->5->NULL, m = 2 and n = 4, return 1->4->3->2->5->NULL. <br>
-	 * Note: Given m, n satisfy the following condition: 1 ≤ m ≤ n ≤ length of list.
+	 * Note: Given m, n satisfy the following condition: 1 <= m <= n <= length of list.
 	 */
 	public static Node reverseLinkedListBetween ( Node head, int m, int n ) {
 		if ( head == null || head.next == null )

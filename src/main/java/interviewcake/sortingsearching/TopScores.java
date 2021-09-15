@@ -16,11 +16,11 @@ import java.util.Arrays;
  * the highestPossibleScore in the game
  * and returns a sorted array of scores in less than O(nlogn) time.
  *
- * We’re defining n as the number of unsortedScores because we’re expecting the number of players
+ * We're defining n as the number of unsortedScores because we're expecting the number of players
  * to keep climbing.
  *
  * And, we'll treat highestPossibleScore as a constant instead of factoring it into our big O time
- * and space costs because the highest possible score isn’t going to change. Even if we do redesign
+ * and space costs because the highest possible score isn't going to change. Even if we do redesign
  * the game a little, the scores will stay around the same order of magnitude.
  */
 public class TopScores {

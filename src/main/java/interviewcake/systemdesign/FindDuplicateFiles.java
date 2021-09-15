@@ -185,7 +185,7 @@ public class FindDuplicateFiles {
 // we find two "matching" files where we actually scan the full file contents to see if they're the same.
 //
 // The most recently edited file is the duplicate. This seems reasonable, but it might be
-// wrong—for example, there might be files which have been edited by daemons (programs that run
+// wrong - for example, there might be files which have been edited by daemons (programs that run
 // in the background) after our friend finished duplicating them.
 //
 // Two files with the same contents are the same file. This seems trivially true, but it could
@@ -203,7 +203,7 @@ public class FindDuplicateFiles {
 // filesystem stores the last accessed time for a file as well) around that time, you know it
 // wasn't copied by your friend. You can use these facts to skip some files.
 //
-// Make the file size the fingerprint — it should be available cheaply as metadata on the file (so
+// Make the file size the fingerprint - it should be available cheaply as metadata on the file (so
 // you don't need to walk through the whole file to see how long it is). You'll get lots of false
 // positives, but that's fine if you treat this as a "preprocessing" step. Maybe you then take
 // hash-based fingerprints only on the files which which have matching sizes. Then you fully

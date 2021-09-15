@@ -3,7 +3,7 @@ package interviewcake.systemdesign;
 import java.util.HashMap;
 
 /**
- * I'm making a search engine called MillionGazillion™.
+ * I'm making a search engine called MillionGazillion TM.
  *
  * I wrote a crawler that visits web pages, stores a few keywords in a database, and follows links
  * to other web pages. I noticed that my crawler was wasting a lot of time visiting the same pages

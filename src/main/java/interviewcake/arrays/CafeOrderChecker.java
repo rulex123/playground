@@ -9,7 +9,7 @@ package interviewcake.arrays;
  * be handled first-come, first-served.
  *
  * Recently, some customers have been complaining that people who placed orders after them are
- * getting their food first. Yikes—that's not good for business!
+ * getting their food first. Yikes - that's not good for business!
  *
  * To investigate their claims, one afternoon I sat behind the registers with my laptop and
  * recorded:
