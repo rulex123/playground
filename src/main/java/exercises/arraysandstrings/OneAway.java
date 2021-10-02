@@ -1,4 +1,4 @@
-package exercises.string;
+package exercises.arraysandstrings;
 
 /**
  * One Away: There are three types of edits that can be performed on strings: insert a character, remove a character, or

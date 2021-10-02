@@ -1,4 +1,4 @@
-package exercises.array;
+package exercises.arraysandstrings;
 
 /**
  * Write a function that returns the median of two sorted arrays. The arrays might be of

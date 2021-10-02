@@ -1,4 +1,4 @@
-package exercises.string;
+package exercises.arraysandstrings;
 
 /**
  * Implement a method to perform basic string compression using the counts of repeated characters. For example, the

@@ -1,4 +1,4 @@
-package exercises.array;
+package exercises.arraysandstrings;
 
 /**
  * Given an array of positive number, find maximum sum subarray such that elements in this subarray are not adjacent to

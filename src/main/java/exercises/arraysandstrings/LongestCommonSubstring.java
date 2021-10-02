@@ -1,4 +1,4 @@
-package exercises.string;
+package exercises.arraysandstrings;
 
 /**
  * Given two strings, write a function that returns the longest common substrings.

@@ -1,4 +1,4 @@
-package exercises.string;
+package exercises.arraysandstrings;
 
 /**
  * Given a string s, find the longest substring in s which is a palindrome.

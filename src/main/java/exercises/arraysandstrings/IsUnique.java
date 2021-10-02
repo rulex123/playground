@@ -1,4 +1,4 @@
-package exercises.string;
+package exercises.arraysandstrings;
 
 /**
  * Implement an algorithm to determine if a string has all unique characters. What if you cannot use any additional data

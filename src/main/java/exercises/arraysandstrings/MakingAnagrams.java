@@ -1,4 +1,4 @@
-package exercises.string;
+package exercises.arraysandstrings;
 
 /**
  * Alice is taking a cryptography class and finding anagrams to be very useful. We consider two strings to be anagrams

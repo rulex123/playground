@@ -1,4 +1,4 @@
-package exercises.string;
+package exercises.arraysandstrings;
 
 /**
  * Assume you have a method isSubstring which checks if one word is a substring of another. Given two strings s1 and s2,

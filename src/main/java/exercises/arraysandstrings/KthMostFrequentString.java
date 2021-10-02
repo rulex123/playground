@@ -1,4 +1,4 @@
-package exercises.string;
+package exercises.arraysandstrings;
 
 import java.util.*;
 
