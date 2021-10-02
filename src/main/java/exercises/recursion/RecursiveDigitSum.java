@@ -1,4 +1,3 @@
-
 package exercises.recursion;
 
 /**
@@ -13,32 +12,32 @@ package exercises.recursion;
  */
 public class RecursiveDigitSum {
 
-	public static void main ( String[] args ) {
-		System.out.println( recursiveDigitSum( "123", 3 ) );
-	}
+    public static void main(String[] args) {
+        System.out.println(recursiveDigitSum("123", 3));
+    }
 
 
-	public static int recursiveDigitSum ( String n, int k ) {
-		StringBuilder sb = new StringBuilder();
+    public static int recursiveDigitSum(String n, int k) {
+        StringBuilder sb = new StringBuilder();
 
-		for ( int i = 0; i < k; i++ ) {
-			sb.append( n );
-		}
+        for (int i = 0; i < k; i++) {
+            sb.append(n);
+        }
 
-		return recursiveDigitSum( sb.toString() );
-	}
+        return recursiveDigitSum(sb.toString());
+    }
 
 
-	private static int recursiveDigitSum ( String n ) {
-		if ( n.length() == 1 )
-			return Integer.parseInt( n );
+    private static int recursiveDigitSum(String n) {
+        if (n.length() == 1)
+            return Integer.parseInt(n);
 
-		int sumOfDigits = 0;
-		for ( int i = 0; i < n.length(); i++ ) {
-			sumOfDigits += n.charAt( i ) - '0';
-		}
+        int sumOfDigits = 0;
+        for (int i = 0; i < n.length(); i++) {
+            sumOfDigits += n.charAt(i) - '0';
+        }
 
-		return recursiveDigitSum( Integer.toString( sumOfDigits ) );
-	}
+        return recursiveDigitSum(Integer.toString(sumOfDigits));
+    }
 
 }

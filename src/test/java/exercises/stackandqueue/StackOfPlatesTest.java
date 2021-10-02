@@ -1,4 +1,3 @@
-
 package exercises.stackandqueue;
 
 import org.junit.Assert;

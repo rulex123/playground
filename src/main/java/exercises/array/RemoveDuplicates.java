@@ -1,4 +1,3 @@
-
 package exercises.array;
 
 import java.util.Arrays;
@@ -14,30 +13,30 @@ import java.util.Arrays;
  */
 public class RemoveDuplicates {
 
-	public static void main ( String[] args ) {
-		int[] array = new int[] {
-				1, 1, 2, 3, 3, 4, 5, 6, 6, 7
-		};
-		System.out.println( removeDuplicates( array ) );
-		System.out.println( Arrays.toString( array ) );
-	}
+    public static void main(String[] args) {
+        int[] array = new int[]{
+                1, 1, 2, 3, 3, 4, 5, 6, 6, 7
+        };
+        System.out.println(removeDuplicates(array));
+        System.out.println(Arrays.toString(array));
+    }
 
 
-	public static int removeDuplicates ( int[] array ) {
-		if ( array == null )
-			throw new NullPointerException( "input array is null" );
+    public static int removeDuplicates(int[] array) {
+        if (array == null)
+            throw new NullPointerException("input array is null");
 
-		if ( array.length == 0 )
-			return 0;
+        if (array.length == 0)
+            return 0;
 
-		int insertAt = 0;
-		for ( int i = 1; i < array.length; i++ ) {
-			if ( array[ insertAt ] != array[ i ] ) {
-				insertAt++;
-				array[ insertAt ] = array[ i ];
-			}
-		}
+        int insertAt = 0;
+        for (int i = 1; i < array.length; i++) {
+            if (array[insertAt] != array[i]) {
+                insertAt++;
+                array[insertAt] = array[i];
+            }
+        }
 
-		return insertAt + 1;
-	}
+        return insertAt + 1;
+    }
 }

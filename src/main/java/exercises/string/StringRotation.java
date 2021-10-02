@@ -1,4 +1,3 @@
-
 package exercises.string;
 
 /**
@@ -11,19 +10,19 @@ package exercises.string;
  */
 public class StringRotation {
 
-	public static void main ( String[] args ) {
-		System.out.println( isRotation( "waterbottle", "erbottlewat" ) );
-		System.out.println( isRotation( "waterbottle", "erbottleswat" ) );
-	}
+    public static void main(String[] args) {
+        System.out.println(isRotation("waterbottle", "erbottlewat"));
+        System.out.println(isRotation("waterbottle", "erbottleswat"));
+    }
 
 
-	public static boolean isRotation(String s1, String s2) {
-		return isSubstring( s1.concat( s1 ), s2 );
-	}
+    public static boolean isRotation(String s1, String s2) {
+        return isSubstring(s1.concat(s1), s2);
+    }
 
 
-	private static boolean isSubstring ( String container, String contained ) {
-		return container.contains( contained );
-	}
+    private static boolean isSubstring(String container, String contained) {
+        return container.contains(contained);
+    }
 
 }

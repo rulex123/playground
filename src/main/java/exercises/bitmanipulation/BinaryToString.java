@@ -1,4 +1,3 @@
-
 package exercises.bitmanipulation;
 
 /**
@@ -11,37 +10,37 @@ package exercises.bitmanipulation;
  */
 public class BinaryToString {
 
-  public static void main(String[] args) {
-    System.out.println(binaryToStringForDoubleBetween0And1(0.25));
-    System.out.println(binaryToStringForDoubleBetween0And1(0.025));
-    System.out.println(binaryToStringForDoubleBetween0And1(0.75));
-    System.out.println(binaryToStringForDoubleBetween0And1(0.750001));
-  }
-
-  public static String binaryToStringForDoubleBetween0And1(double num) {
-    if (num >= 1 || num <= 0) {
-      throw new IllegalArgumentException("invalid number!");
+    public static void main(String[] args) {
+        System.out.println(binaryToStringForDoubleBetween0And1(0.25));
+        System.out.println(binaryToStringForDoubleBetween0And1(0.025));
+        System.out.println(binaryToStringForDoubleBetween0And1(0.75));
+        System.out.println(binaryToStringForDoubleBetween0And1(0.750001));
     }
 
-    StringBuilder sb = new StringBuilder();
-    sb.append(".");
-    int exponent = 1;
-    while (num > 0) {
-      if (sb.length() > 32) {
-        return "ERROR";
-      }
+    public static String binaryToStringForDoubleBetween0And1(double num) {
+        if (num >= 1 || num <= 0) {
+            throw new IllegalArgumentException("invalid number!");
+        }
 
-      double fract = Math.pow(2.0, -exponent);
-      if (num >= fract) {
-        sb.append("1");
-        num = num - fract;
-      } else {
-        sb.append("0");
-      }
-      exponent++;
+        StringBuilder sb = new StringBuilder();
+        sb.append(".");
+        int exponent = 1;
+        while (num > 0) {
+            if (sb.length() > 32) {
+                return "ERROR";
+            }
+
+            double fract = Math.pow(2.0, -exponent);
+            if (num >= fract) {
+                sb.append("1");
+                num = num - fract;
+            } else {
+                sb.append("0");
+            }
+            exponent++;
+        }
+
+        return sb.toString();
     }
-
-    return sb.toString();
-  }
 
 }

@@ -1,4 +1,3 @@
-
 package exercises.misc;
 
 import java.util.Arrays;
@@ -20,55 +19,53 @@ import java.util.Arrays;
  */
 public class MeetingPlanner {
 
-	public static void main ( String[] args ) {
+    public static void main(String[] args) {
 
-		int[][] slotsA = new int[][] {
-				new int[] {
-						10, 50
-				}, new int[] {
-						60, 120
-				}, new int[] {
-						140, 210
-				}
-		};
+        int[][] slotsA = new int[][]{
+                new int[]{
+                        10, 50
+                }, new int[]{
+                60, 120
+        }, new int[]{
+                140, 210
+        }
+        };
 
-		int[][] slotsB = new int[][] {
-				new int[] {
-						0, 15
-				}, new int[] {
-						60, 70
-				}
-		};
+        int[][] slotsB = new int[][]{
+                new int[]{
+                        0, 15
+                }, new int[]{
+                60, 70
+        }
+        };
 
-		System.out.println( Arrays.toString( meetingPlanner( slotsA, slotsB, 8 ) ) );
-		System.out.println( Arrays.toString( meetingPlanner( slotsA, slotsB, 12 ) ) );
-	}
+        System.out.println(Arrays.toString(meetingPlanner(slotsA, slotsB, 8)));
+        System.out.println(Arrays.toString(meetingPlanner(slotsA, slotsB, 12)));
+    }
 
 
-	public static int[] meetingPlanner ( int[][] slotsA, int[][] slotsB, int dur ) {
-		int indexSlotA = 0;
-		int indexSlotB = 0;
+    public static int[] meetingPlanner(int[][] slotsA, int[][] slotsB, int dur) {
+        int indexSlotA = 0;
+        int indexSlotB = 0;
 
-		while ( indexSlotA < slotsA.length && indexSlotB < slotsB.length ) {
-			int start = Math.max( slotsA[ indexSlotA ][ 0 ], slotsB[ indexSlotB ][ 0 ] );
-			int end = Math.min( slotsA[ indexSlotA ][ 1 ], slotsB[ indexSlotB ][ 1 ] );
+        while (indexSlotA < slotsA.length && indexSlotB < slotsB.length) {
+            int start = Math.max(slotsA[indexSlotA][0], slotsB[indexSlotB][0]);
+            int end = Math.min(slotsA[indexSlotA][1], slotsB[indexSlotB][1]);
 
-			if ( start + dur <= end ) {
-				return new int[] {
-						start, start + dur
-				};
-			}
-			else {
-				if ( slotsB[ indexSlotB ][ 1 ] < slotsA[ indexSlotA ][ 1 ] ) {
-					indexSlotB++;
-				}
-				else {
-					indexSlotA++;
-				}
-			}
-		}
+            if (start + dur <= end) {
+                return new int[]{
+                        start, start + dur
+                };
+            } else {
+                if (slotsB[indexSlotB][1] < slotsA[indexSlotA][1]) {
+                    indexSlotB++;
+                } else {
+                    indexSlotA++;
+                }
+            }
+        }
 
-		return null;
-	}
+        return null;
+    }
 
 }

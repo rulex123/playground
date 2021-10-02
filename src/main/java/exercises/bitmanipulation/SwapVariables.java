@@ -5,20 +5,20 @@ package exercises.bitmanipulation;
  */
 public class SwapVariables {
 
-  public static void main(String[] args) {
-    swapVariables(13, 34);
-    swapVariables(-2, 86);
-    swapVariables(4, 123);
-  }
+    public static void main(String[] args) {
+        swapVariables(13, 34);
+        swapVariables(-2, 86);
+        swapVariables(4, 123);
+    }
 
-  static void swapVariables(int firstNumber, int secondNumber) {
-    System.out.println("before swap <" + firstNumber + "," + secondNumber + ">");
+    static void swapVariables(int firstNumber, int secondNumber) {
+        System.out.println("before swap <" + firstNumber + "," + secondNumber + ">");
 
-    // swap
-    firstNumber ^= secondNumber;
-    secondNumber ^= firstNumber;
-    firstNumber ^= secondNumber;
+        // swap
+        firstNumber ^= secondNumber;
+        secondNumber ^= firstNumber;
+        firstNumber ^= secondNumber;
 
-    System.out.println("after swap swap <" + firstNumber + "," + secondNumber + ">");
-  }
+        System.out.println("after swap swap <" + firstNumber + "," + secondNumber + ">");
+    }
 }

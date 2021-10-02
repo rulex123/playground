@@ -5,20 +5,20 @@ package exercises.recursion;
  */
 public class Sum {
 
-  public static void main(String[] args) {
-    System.out.println(sum(3, 25));
-    System.out.println(sum(12, 28));
-    System.out.println(sum(13, 13));
-    System.out.println(sum(-4, -5));
-    System.out.println(sum(-20, 10));
-  }
-
-  static int sum(int firstNumber, int secondNumber) {
-    if (secondNumber == 0) {
-      return firstNumber;
+    public static void main(String[] args) {
+        System.out.println(sum(3, 25));
+        System.out.println(sum(12, 28));
+        System.out.println(sum(13, 13));
+        System.out.println(sum(-4, -5));
+        System.out.println(sum(-20, 10));
     }
-    int partialSum = firstNumber ^ secondNumber;
-    int carry  = (firstNumber & secondNumber) << 1;
-    return sum(partialSum, carry);
-  }
+
+    static int sum(int firstNumber, int secondNumber) {
+        if (secondNumber == 0) {
+            return firstNumber;
+        }
+        int partialSum = firstNumber ^ secondNumber;
+        int carry = (firstNumber & secondNumber) << 1;
+        return sum(partialSum, carry);
+    }
 }

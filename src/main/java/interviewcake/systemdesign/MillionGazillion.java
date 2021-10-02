@@ -4,95 +4,95 @@ import java.util.HashMap;
 
 /**
  * I'm making a search engine called MillionGazillion TM.
- *
+ * <p>
  * I wrote a crawler that visits web pages, stores a few keywords in a database, and follows links
  * to other web pages. I noticed that my crawler was wasting a lot of time visiting the same pages
  * over and over, so I made a hash set, visited, where I'm storing URLs I've already visited. Now
  * the crawler only visits a URL if it hasn't already been visited.
- *
+ * <p>
  * Thing is, the crawler is running on my old desktop computer in my parents' basement (where I
  * totally don't live anymore), and it keeps running out of memory because visited is getting so
  * huge.
- *
+ * <p>
  * How can I trim down the amount of space taken up by visited?
  */
 public class MillionGazillion {
 
-  public static void main(String[] args) {
-    Trie visitedWebsites = new Trie();
-    visitedWebsites.addWord("donut.net");
-    visitedWebsites.addWord("dogood.org");
-    visitedWebsites.addWord("dog.com");
-    visitedWebsites.addWord("dog.com/about");
-    visitedWebsites.addWord("dog.com/pug");
-    visitedWebsites.addWord("dog.org");
+    public static void main(String[] args) {
+        Trie visitedWebsites = new Trie();
+        visitedWebsites.addWord("donut.net");
+        visitedWebsites.addWord("dogood.org");
+        visitedWebsites.addWord("dog.com");
+        visitedWebsites.addWord("dog.com/about");
+        visitedWebsites.addWord("dog.com/pug");
+        visitedWebsites.addWord("dog.org");
 
-    System.out.println(visitedWebsites.addWord("cat.com")); // new website
-    System.out.println(visitedWebsites.addWord("dog.com/about")); // visited website
-    System.out.println(visitedWebsites.addWord("dog.com/husky")); // new website
-  }
-
-  static class TrieNode {
-
-    private HashMap<Character, TrieNode> nodeChildren;
-
-    public TrieNode() {
-      this.nodeChildren = new HashMap<>();
+        System.out.println(visitedWebsites.addWord("cat.com")); // new website
+        System.out.println(visitedWebsites.addWord("dog.com/about")); // visited website
+        System.out.println(visitedWebsites.addWord("dog.com/husky")); // new website
     }
 
-    public boolean hasChildNode(char character) {
-      return this.nodeChildren.containsKey(character);
-    }
+    static class TrieNode {
 
-    public void makeChildNode(char character) {
-      this.nodeChildren.put(character, new TrieNode());
-    }
+        private HashMap<Character, TrieNode> nodeChildren;
 
-    public TrieNode getChildNode(char character) {
-      return this.nodeChildren.get(character);
-    }
-  }
-
-  static class Trie {
-
-    private TrieNode rootNode;
-    private static final char END_OF_WORD_MARKER = '\0';
-
-    public Trie() {
-      this.rootNode = new TrieNode();
-    }
-
-    public boolean addWord(String word) {
-
-      TrieNode currentNode = this.rootNode;
-      boolean isNewWord = false;
-
-      // Work downwards through the trie, adding nodes
-      // as needed, and keeping track of whether we add
-      // any nodes.
-      for (int i = 0; i < word.length(); i++) {
-        char character = word.charAt(i);
-
-        if (!currentNode.hasChildNode(character)) {
-          isNewWord = true;
-          currentNode.makeChildNode(character);
+        public TrieNode() {
+            this.nodeChildren = new HashMap<>();
         }
 
-        currentNode = currentNode.getChildNode(character);
-      }
+        public boolean hasChildNode(char character) {
+            return this.nodeChildren.containsKey(character);
+        }
 
-      // Explicitly mark the end of a word.
-      // Otherwise, we might say a word is
-      // present if it is a prefix of a different,
-      // longer word that was added earlier.
-      if (!currentNode.hasChildNode(END_OF_WORD_MARKER)) {
-        isNewWord = true;
-        currentNode.makeChildNode(END_OF_WORD_MARKER);
-      }
+        public void makeChildNode(char character) {
+            this.nodeChildren.put(character, new TrieNode());
+        }
 
-      return isNewWord;
+        public TrieNode getChildNode(char character) {
+            return this.nodeChildren.get(character);
+        }
     }
-  }
+
+    static class Trie {
+
+        private static final char END_OF_WORD_MARKER = '\0';
+        private TrieNode rootNode;
+
+        public Trie() {
+            this.rootNode = new TrieNode();
+        }
+
+        public boolean addWord(String word) {
+
+            TrieNode currentNode = this.rootNode;
+            boolean isNewWord = false;
+
+            // Work downwards through the trie, adding nodes
+            // as needed, and keeping track of whether we add
+            // any nodes.
+            for (int i = 0; i < word.length(); i++) {
+                char character = word.charAt(i);
+
+                if (!currentNode.hasChildNode(character)) {
+                    isNewWord = true;
+                    currentNode.makeChildNode(character);
+                }
+
+                currentNode = currentNode.getChildNode(character);
+            }
+
+            // Explicitly mark the end of a word.
+            // Otherwise, we might say a word is
+            // present if it is a prefix of a different,
+            // longer word that was added earlier.
+            if (!currentNode.hasChildNode(END_OF_WORD_MARKER)) {
+                isNewWord = true;
+                currentNode.makeChildNode(END_OF_WORD_MARKER);
+            }
+
+            return isNewWord;
+        }
+    }
 }
 
 //Complexity

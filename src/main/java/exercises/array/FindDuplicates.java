@@ -1,4 +1,3 @@
-
 package exercises.array;
 
 import java.util.Arrays;
@@ -14,45 +13,44 @@ import java.util.Set;
  */
 public class FindDuplicates {
 
-	public static void main ( String[] args ) {
-		// array with dups
-		int[] array = new int[] {
-				1, 3, 1, 2, 2, 5
-		};
+    public static void main(String[] args) {
+        // array with dups
+        int[] array = new int[]{
+                1, 3, 1, 2, 2, 5
+        };
 
-		System.out.println( Arrays.toString( findDuplicates( array ) ) );
+        System.out.println(Arrays.toString(findDuplicates(array)));
 
-		// array w/o dups
-		array = new int[] {
-				1, 2, 3, 4, 5
-		};
+        // array w/o dups
+        array = new int[]{
+                1, 2, 3, 4, 5
+        };
 
-		System.out.println( Arrays.toString( findDuplicates( array ) ) );
+        System.out.println(Arrays.toString(findDuplicates(array)));
 
-	}
+    }
 
 
-	public static Integer[] findDuplicates ( int[] array ) {
-		Set<Integer> dups = new HashSet<>();
+    public static Integer[] findDuplicates(int[] array) {
+        Set<Integer> dups = new HashSet<>();
 
-		for ( int i = 0; i < array.length; i++ ) {
-			int indexToFlip = Math.abs( array[ i ] ) - 1;
-			if ( array[ indexToFlip ] < 0 ) {
-				dups.add( Math.abs( array[ i ] ) );
-			}
-			else {
-				array[ indexToFlip ] = -array[ indexToFlip ];
-			}
-		}
+        for (int i = 0; i < array.length; i++) {
+            int indexToFlip = Math.abs(array[i]) - 1;
+            if (array[indexToFlip] < 0) {
+                dups.add(Math.abs(array[i]));
+            } else {
+                array[indexToFlip] = -array[indexToFlip];
+            }
+        }
 
-		Integer[] result = dups.toArray( new Integer[] {} );
+        Integer[] result = dups.toArray(new Integer[]{});
 
-		// reset input array to original state
-		for ( int i = 0; i < array.length; i++ ) {
-			array[ i ] = Math.abs( array[ i ] );
-		}
+        // reset input array to original state
+        for (int i = 0; i < array.length; i++) {
+            array[i] = Math.abs(array[i]);
+        }
 
-		return result;
-	}
+        return result;
+    }
 
 }

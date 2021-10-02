@@ -1,4 +1,3 @@
-
 package exercises.heap;
 
 import java.util.Arrays;
@@ -16,70 +15,68 @@ import java.util.PriorityQueue;
  */
 public class RunningMedian {
 
-	public static void main ( String[] args ) {
-		int[] array = new int[] {
-				12, 4, 5, 3, 8, 7
-		};
-		double[] medians = getMedians( array );
-		System.out.println( Arrays.toString( medians ) );
-	}
+    public static void main(String[] args) {
+        int[] array = new int[]{
+                12, 4, 5, 3, 8, 7
+        };
+        double[] medians = getMedians(array);
+        System.out.println(Arrays.toString(medians));
+    }
 
 
-	private static double[] getMedians ( int[] array ) {
-		if ( array == null || array.length == 0 )
-			return null;
+    private static double[] getMedians(int[] array) {
+        if (array == null || array.length == 0)
+            return null;
 
-		double[] medians = new double[array.length];
-		PriorityQueue<Integer> topHalf = new PriorityQueue<>(); // min heap
-		PriorityQueue<Integer> bottomHalf = new PriorityQueue<>( new Comparator<Integer>() // max heap
-		{
-			@Override
-			public int compare ( Integer a, Integer b ) {
-				return b.compareTo( a );
-			}
-		} );
+        double[] medians = new double[array.length];
+        PriorityQueue<Integer> topHalf = new PriorityQueue<>(); // min heap
+        PriorityQueue<Integer> bottomHalf = new PriorityQueue<>(new Comparator<Integer>() // max heap
+        {
+            @Override
+            public int compare(Integer a, Integer b) {
+                return b.compareTo(a);
+            }
+        });
 
-		for ( int i = 0; i < array.length; i++ ) {
-			addNumberToHeap( array[ i ], topHalf, bottomHalf );
-			rebalanceHeaps( topHalf, bottomHalf );
-			medians[ i ] = calculateMedian( topHalf, bottomHalf );
-		}
+        for (int i = 0; i < array.length; i++) {
+            addNumberToHeap(array[i], topHalf, bottomHalf);
+            rebalanceHeaps(topHalf, bottomHalf);
+            medians[i] = calculateMedian(topHalf, bottomHalf);
+        }
 
-		return medians;
-	}
-
-
-	private static double calculateMedian ( PriorityQueue<Integer> topHalf, PriorityQueue<Integer> bottomHalf ) {
-		if ( topHalf.size() == bottomHalf.size() ) {
-			return ((double) topHalf.peek() + bottomHalf.peek()) / 2;
-		}
-		else {
-			if ( topHalf.size() > bottomHalf.size() )
-				return topHalf.peek();
-			else
-				return bottomHalf.peek();
-		}
-	}
+        return medians;
+    }
 
 
-	private static void rebalanceHeaps ( PriorityQueue<Integer> topHalf, PriorityQueue<Integer> bottomHalf ) {
-		PriorityQueue<Integer> smallerHeap = topHalf.size() < bottomHalf.size() ? topHalf : bottomHalf;
-		PriorityQueue<Integer> biggerHeap = topHalf.size() > bottomHalf.size() ? topHalf : bottomHalf;
+    private static double calculateMedian(PriorityQueue<Integer> topHalf, PriorityQueue<Integer> bottomHalf) {
+        if (topHalf.size() == bottomHalf.size()) {
+            return ((double) topHalf.peek() + bottomHalf.peek()) / 2;
+        } else {
+            if (topHalf.size() > bottomHalf.size())
+                return topHalf.peek();
+            else
+                return bottomHalf.peek();
+        }
+    }
 
-		if ( biggerHeap.size() - smallerHeap.size() > 1 ) {
-			smallerHeap.add( biggerHeap.poll() );
-		}
-	}
+
+    private static void rebalanceHeaps(PriorityQueue<Integer> topHalf, PriorityQueue<Integer> bottomHalf) {
+        PriorityQueue<Integer> smallerHeap = topHalf.size() < bottomHalf.size() ? topHalf : bottomHalf;
+        PriorityQueue<Integer> biggerHeap = topHalf.size() > bottomHalf.size() ? topHalf : bottomHalf;
+
+        if (biggerHeap.size() - smallerHeap.size() > 1) {
+            smallerHeap.add(biggerHeap.poll());
+        }
+    }
 
 
-	private static void addNumberToHeap ( int number, PriorityQueue<Integer> topHalf,
-			PriorityQueue<Integer> bottomHalf ) {
-		if ( bottomHalf.isEmpty() || number < bottomHalf.peek().intValue() ) {
-			bottomHalf.add( number );
-		}
-		else {
-			topHalf.add( number );
-		}
-	}
+    private static void addNumberToHeap(int number, PriorityQueue<Integer> topHalf,
+                                        PriorityQueue<Integer> bottomHalf) {
+        if (bottomHalf.isEmpty() || number < bottomHalf.peek().intValue()) {
+            bottomHalf.add(number);
+        } else {
+            topHalf.add(number);
+        }
+    }
 
 }

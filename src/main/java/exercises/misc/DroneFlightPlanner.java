@@ -1,4 +1,3 @@
-
 package exercises.misc;
 
 /**
@@ -17,44 +16,44 @@ package exercises.misc;
  */
 public class DroneFlightPlanner {
 
-	public static void main ( String[] args ) {
-		int[][] route = new int[5][3];
+    public static void main(String[] args) {
+        int[][] route = new int[5][3];
 
-		route[ 0 ][ 0 ] = 0;
-		route[ 0 ][ 1 ] = 2;
-		route[ 0 ][ 2 ] = 10;
+        route[0][0] = 0;
+        route[0][1] = 2;
+        route[0][2] = 10;
 
-		route[ 1 ][ 0 ] = 3;
-		route[ 1 ][ 1 ] = 5;
-		route[ 1 ][ 2 ] = 0;
+        route[1][0] = 3;
+        route[1][1] = 5;
+        route[1][2] = 0;
 
-		route[ 2 ][ 0 ] = 9;
-		route[ 2 ][ 1 ] = 20;
-		route[ 2 ][ 2 ] = 6;
+        route[2][0] = 9;
+        route[2][1] = 20;
+        route[2][2] = 6;
 
-		route[ 3 ][ 0 ] = 10;
-		route[ 3 ][ 1 ] = 12;
-		route[ 3 ][ 2 ] = 15;
+        route[3][0] = 10;
+        route[3][1] = 12;
+        route[3][2] = 15;
 
-		route[ 4 ][ 0 ] = 10;
-		route[ 4 ][ 1 ] = 10;
-		route[ 4 ][ 2 ] = 8;
+        route[4][0] = 10;
+        route[4][1] = 10;
+        route[4][2] = 8;
 
-		System.out.println( calculateDroneMinEnergy( route ) );
+        System.out.println(calculateDroneMinEnergy(route));
 
-	}
+    }
 
 
-	public static int calculateDroneMinEnergy ( int[][] route ) {
-		int largestEnergyDeficit = 0;
-		int energyBudget = 0;
-		for ( int i = 1; i < route.length; i++ ) {
-			energyBudget += route[ i - 1 ][ 2 ] - route[ i ][ 2 ];
-			if ( energyBudget < largestEnergyDeficit )
-				largestEnergyDeficit = energyBudget;
-		}
+    public static int calculateDroneMinEnergy(int[][] route) {
+        int largestEnergyDeficit = 0;
+        int energyBudget = 0;
+        for (int i = 1; i < route.length; i++) {
+            energyBudget += route[i - 1][2] - route[i][2];
+            if (energyBudget < largestEnergyDeficit)
+                largestEnergyDeficit = energyBudget;
+        }
 
-		return Math.abs( largestEnergyDeficit );
-	}
+        return Math.abs(largestEnergyDeficit);
+    }
 
 }

@@ -1,4 +1,3 @@
-
 package exercises.linkedlist;
 
 /**
@@ -14,53 +13,52 @@ package exercises.linkedlist;
  */
 public class OddEvenLinkedList {
 
-	public static void main ( String[] args ) {
-		Node head = new Node( 1 );
-		head.appendToTail( 2 );
-		head.appendToTail( 3 );
-		head.appendToTail( 4 );
-		head.appendToTail( 5 );
-		head.appendToTail( 6 );
+    public static void main(String[] args) {
+        Node head = new Node(1);
+        head.appendToTail(2);
+        head.appendToTail(3);
+        head.appendToTail(4);
+        head.appendToTail(5);
+        head.appendToTail(6);
 
-		DeleteMiddleNode.printLinkedList( head );
-		System.out.println( "----------" );
+        DeleteMiddleNode.printLinkedList(head);
+        System.out.println("----------");
 
-		head = oddEvenLinkedList( head );
-		DeleteMiddleNode.printLinkedList( head );
+        head = oddEvenLinkedList(head);
+        DeleteMiddleNode.printLinkedList(head);
 
-	}
+    }
 
 
-	public static Node oddEvenLinkedList ( Node head ) {
-		if ( head == null || head.next == null )
-			return head;
+    public static Node oddEvenLinkedList(Node head) {
+        if (head == null || head.next == null)
+            return head;
 
-		Node currNode = head;
-		Node firstEvenNode = head.next;
-		Node lastOddNode = null;
-		int nodesCounter = 0;
+        Node currNode = head;
+        Node firstEvenNode = head.next;
+        Node lastOddNode = null;
+        int nodesCounter = 0;
 
-		while ( currNode.next != null ) {
-			nodesCounter++; // increment counter
+        while (currNode.next != null) {
+            nodesCounter++; // increment counter
 
-			// logic to determine the last odd node
-			if ( currNode.next.next == null ) {
-				if ( nodesCounter % 2 == 0 ) {
-					lastOddNode = currNode.next;
-				}
-				else {
-					lastOddNode = currNode;
-				}
-			}
+            // logic to determine the last odd node
+            if (currNode.next.next == null) {
+                if (nodesCounter % 2 == 0) {
+                    lastOddNode = currNode.next;
+                } else {
+                    lastOddNode = currNode;
+                }
+            }
 
-			Node nextNode = currNode.next; // save original next node before resetting curr.next
-			currNode.next = currNode.next.next; // reset curr.next
-			currNode = nextNode; // swap current node with original next
-		}
+            Node nextNode = currNode.next; // save original next node before resetting curr.next
+            currNode.next = currNode.next.next; // reset curr.next
+            currNode = nextNode; // swap current node with original next
+        }
 
-		// set last odd node to point to first even node
-		lastOddNode.next = firstEvenNode;
-		return head;
-	}
+        // set last odd node to point to first even node
+        lastOddNode.next = firstEvenNode;
+        return head;
+    }
 
 }

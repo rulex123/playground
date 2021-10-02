@@ -1,12 +1,7 @@
-
 package exercises.recursion;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
-import java.util.Stack;
 
 /**
  * You have a stack of n boxes, with widths w1, w2, w3, etc. , heights h1, h2, h3, etc., depths d1,
@@ -18,87 +13,87 @@ import java.util.Stack;
 public class StackOfBoxes {
 
 
-  public static void main(String[] args) {
-    Box[] boxes = new Box[3];
-    boxes[0] = new Box(100, 3, 54);
-    boxes[1] = new Box(200, 198, 55);
-    boxes[2] = new Box(12, 200, 102);
+    static Comparator<Box> ascending_width = (b1, b2) -> {
+        if (b1.width > b2.width) {
+            return 1; // first box is greater (i.e. appears after)
+        } else if (b1.width < b2.width) {
+            return -1; // first box is smaller (i.e. appears before)
+        } else {
+            return 0;
+        }
+    };
 
-    System.out.println(stackOfBoxes(boxes));
-  }
+    public static void main(String[] args) {
+        Box[] boxes = new Box[3];
+        boxes[0] = new Box(100, 3, 54);
+        boxes[1] = new Box(200, 198, 55);
+        boxes[2] = new Box(12, 200, 102);
 
-  static int stackOfBoxes(Box[] boxes) {
-    if (boxes == null || boxes.length == 0) {
-      return 0;
-    }
-    Arrays.sort(boxes, ascending_width.reversed());
-    return stackOfBoxes(boxes, null, 0, new int[boxes.length]);
-  }
-
-  private static int stackOfBoxes(Box[] boxes, Box currentBottom, int offset, int[] cache) {
-    // base case
-    if (offset == boxes.length) {
-      return 0; // we are out of boxes!
+        System.out.println(stackOfBoxes(boxes));
     }
 
-    // use offset to grab a new bottom for the stack
-    Box newBottom = boxes[offset];
-    int heightWithBottom = 0;
-    if (currentBottom == null || newBottom.canBeStackedAbove(currentBottom)) {
-      if (cache[offset] == 0) { // check if we have computed this combination already
-        // if not, compute the height of stack that uses the new bottom and insert into cache
-        heightWithBottom = stackOfBoxes(boxes, newBottom, offset + 1, cache);
-        heightWithBottom += newBottom.height;
-        cache[offset] = heightWithBottom;
-      } else {
-        // read from cache
-        heightWithBottom = cache[offset];
-      }
+    static int stackOfBoxes(Box[] boxes) {
+        if (boxes == null || boxes.length == 0) {
+            return 0;
+        }
+        Arrays.sort(boxes, ascending_width.reversed());
+        return stackOfBoxes(boxes, null, 0, new int[boxes.length]);
     }
 
-    // compute the height of stack that doesn't use the new bottom (i.e. maintain current bottom
-    // and increase offset)
-    int heightWithoutBottom = stackOfBoxes(boxes, currentBottom, offset + 1, cache);
+    private static int stackOfBoxes(Box[] boxes, Box currentBottom, int offset, int[] cache) {
+        // base case
+        if (offset == boxes.length) {
+            return 0; // we are out of boxes!
+        }
 
-    // return bigger of two heights
-    return Math.max(heightWithoutBottom, heightWithBottom);
-  }
+        // use offset to grab a new bottom for the stack
+        Box newBottom = boxes[offset];
+        int heightWithBottom = 0;
+        if (currentBottom == null || newBottom.canBeStackedAbove(currentBottom)) {
+            if (cache[offset] == 0) { // check if we have computed this combination already
+                // if not, compute the height of stack that uses the new bottom and insert into cache
+                heightWithBottom = stackOfBoxes(boxes, newBottom, offset + 1, cache);
+                heightWithBottom += newBottom.height;
+                cache[offset] = heightWithBottom;
+            } else {
+                // read from cache
+                heightWithBottom = cache[offset];
+            }
+        }
 
-  private static class Box {
+        // compute the height of stack that doesn't use the new bottom (i.e. maintain current bottom
+        // and increase offset)
+        int heightWithoutBottom = stackOfBoxes(boxes, currentBottom, offset + 1, cache);
 
-    final int width;
-    final int height;
-    final int depth;
-
-    Box(final int width, final int height, final int depth) {
-      this.width = width;
-      this.height = height;
-      this.depth = depth;
+        // return bigger of two heights
+        return Math.max(heightWithoutBottom, heightWithBottom);
     }
 
-    @Override
-    public String toString() {
-      return "{w=" + width +
-             ",h=" + height +
-             ",d=" + depth + "}";
-    }
+    private static class Box {
 
-    // returns true if this box can be stacked above the given box, false otherwise
-    boolean canBeStackedAbove(Box box) {
-      if (this.height < box.height && this.depth < box.depth) {
-        return true;
-      }
-      return false;
-    }
-  }
+        final int width;
+        final int height;
+        final int depth;
 
-  static Comparator<Box> ascending_width = (b1, b2) -> {
-    if (b1.width > b2.width) {
-      return 1; // first box is greater (i.e. appears after)
-    } else if (b1.width < b2.width) {
-      return -1; // first box is smaller (i.e. appears before)
-    } else {
-      return 0;
+        Box(final int width, final int height, final int depth) {
+            this.width = width;
+            this.height = height;
+            this.depth = depth;
+        }
+
+        @Override
+        public String toString() {
+            return "{w=" + width +
+                    ",h=" + height +
+                    ",d=" + depth + "}";
+        }
+
+        // returns true if this box can be stacked above the given box, false otherwise
+        boolean canBeStackedAbove(Box box) {
+            if (this.height < box.height && this.depth < box.depth) {
+                return true;
+            }
+            return false;
+        }
     }
-  };
 }

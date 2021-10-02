@@ -1,4 +1,3 @@
-
 package exercises.recursion;
 
 /**
@@ -10,58 +9,58 @@ package exercises.recursion;
  */
 public class RecursiveMultiply {
 
-	public static void main ( String[] args ) {
-		System.out.println( recursiveMultiply( 16, 4 ) );
-		System.out.println( iterativeMultiply( 16, 4 ) );
+    public static void main(String[] args) {
+        System.out.println(recursiveMultiply(16, 4));
+        System.out.println(iterativeMultiply(16, 4));
 
-	}
+    }
 
 
-	/*
-	 * Recursive implementation: linear time complexity, based on the smaller of the two input
-	 * numbers
-	 */
-	private static int recursiveMultiply( int a, int b ) {
-		if ( a == 0 || b == 0 ) {
-			return 0;
-		}
+    /*
+     * Recursive implementation: linear time complexity, based on the smaller of the two input
+     * numbers
+     */
+    private static int recursiveMultiply(int a, int b) {
+        if (a == 0 || b == 0) {
+            return 0;
+        }
 
-		if ( a == 1 ) {
-			return b;
-		}
+        if (a == 1) {
+            return b;
+        }
 
-		if ( b == 1 ) {
-			return a;
-		}
+        if (b == 1) {
+            return a;
+        }
 
-		int smaller = a < b ? a : b;
-		int bigger = a < b ? b : a;
+        int smaller = a < b ? a : b;
+        int bigger = a < b ? b : a;
 
-		return bigger + recursiveMultiply( bigger, smaller - 1 );
-	}
+        return bigger + recursiveMultiply(bigger, smaller - 1);
+    }
 
-	/**
-	 * Iterative implementation
-	 */
-	private static int iterativeMultiply(int a, int b) {
-		if (a == 0 || b == 0)
-			return 0;
+    /**
+     * Iterative implementation
+     */
+    private static int iterativeMultiply(int a, int b) {
+        if (a == 0 || b == 0)
+            return 0;
 
-		if (a == 1)
-			return b;
+        if (a == 1)
+            return b;
 
-		if (b == 1)
-			return a;
+        if (b == 1)
+            return a;
 
-		int smaller = a < b ? a : b;
-		int bigger = a > b ? a : b;
+        int smaller = a < b ? a : b;
+        int bigger = a > b ? a : b;
 
-		int result = bigger;
-		for (int i = 0; i < smaller - 1; i++) {
-			result += bigger;
-		}
+        int result = bigger;
+        for (int i = 0; i < smaller - 1; i++) {
+            result += bigger;
+        }
 
-		return result;
-	}
+        return result;
+    }
 
 }

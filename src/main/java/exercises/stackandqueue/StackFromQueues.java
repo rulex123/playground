@@ -1,4 +1,3 @@
-
 package exercises.stackandqueue;
 
 import java.util.LinkedList;
@@ -11,6 +10,33 @@ import java.util.Queue;
  * @version 1.0 Jul 11, 2017
  */
 public class StackFromQueues {
+
+    public static void main(String[] args) {
+        StackFromSingleQueue stackFromSingleQ = new StackFromSingleQueue();
+        stackFromSingleQ.push(1);
+        stackFromSingleQ.push(2);
+        stackFromSingleQ.push(3);
+        stackFromSingleQ.push(4);
+
+        System.out.println(stackFromSingleQ.pop()); // expected 4
+        System.out.println(stackFromSingleQ.pop()); // expected 3
+        System.out.println(stackFromSingleQ.pop()); // expected 2
+        System.out.println(stackFromSingleQ.pop()); // expected 1
+
+        System.out.println("--------");
+
+        StackFromTwoQueues stackFromTwoQs = new StackFromTwoQueues();
+        stackFromTwoQs.push(5);
+        stackFromTwoQs.push(6);
+        stackFromTwoQs.push(7);
+        stackFromTwoQs.push(8);
+
+        System.out.println(stackFromTwoQs.pop()); // expected 8
+        System.out.println(stackFromTwoQs.pop()); // expected 7
+        System.out.println(stackFromTwoQs.pop()); // expected 6
+        System.out.println(stackFromTwoQs.pop()); // expected 5
+
+    }
 
     public static class EmptyStackException extends RuntimeException {
         private static final long serialVersionUID = 2116305097722419575L;
@@ -70,34 +96,6 @@ public class StackFromQueues {
 
             return this.queue.poll().intValue();
         }
-    }
-
-
-    public static void main(String[] args) {
-        StackFromSingleQueue stackFromSingleQ = new StackFromSingleQueue();
-        stackFromSingleQ.push(1);
-        stackFromSingleQ.push(2);
-        stackFromSingleQ.push(3);
-        stackFromSingleQ.push(4);
-
-        System.out.println(stackFromSingleQ.pop()); // expected 4
-        System.out.println(stackFromSingleQ.pop()); // expected 3
-        System.out.println(stackFromSingleQ.pop()); // expected 2
-        System.out.println(stackFromSingleQ.pop()); // expected 1
-
-        System.out.println("--------");
-
-        StackFromTwoQueues stackFromTwoQs = new StackFromTwoQueues();
-        stackFromTwoQs.push(5);
-        stackFromTwoQs.push(6);
-        stackFromTwoQs.push(7);
-        stackFromTwoQs.push(8);
-
-        System.out.println(stackFromTwoQs.pop()); // expected 8
-        System.out.println(stackFromTwoQs.pop()); // expected 7
-        System.out.println(stackFromTwoQs.pop()); // expected 6
-        System.out.println(stackFromTwoQs.pop()); // expected 5
-
     }
 
 }

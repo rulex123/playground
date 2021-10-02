@@ -1,4 +1,3 @@
-
 package exercises.linkedlist;
 
 /**
@@ -11,48 +10,47 @@ package exercises.linkedlist;
  */
 public class PartitionLinkedList {
 
-	public static void main ( String[] args ) {
-		Node head = new Node( 1 );
-		head.appendToTail( 4 );
-		head.appendToTail( 3 );
-		head.appendToTail( 2 );
-		head.appendToTail( 5 );
-		head.appendToTail( 2 );
+    public static void main(String[] args) {
+        Node head = new Node(1);
+        head.appendToTail(4);
+        head.appendToTail(3);
+        head.appendToTail(2);
+        head.appendToTail(5);
+        head.appendToTail(2);
 
-		DeleteMiddleNode.printLinkedList( head );
+        DeleteMiddleNode.printLinkedList(head);
 
-		System.out.println( "----------" );
+        System.out.println("----------");
 
-		head = partitionLinkedList( head, 3 );
+        head = partitionLinkedList(head, 3);
 
-		DeleteMiddleNode.printLinkedList( head );
-	}
+        DeleteMiddleNode.printLinkedList(head);
+    }
 
 
-	public static Node partitionLinkedList ( Node node, int x ) {
-		if ( node == null )
-			return null;
+    public static Node partitionLinkedList(Node node, int x) {
+        if (node == null)
+            return null;
 
-		Node startFirstPartition = new Node( 0 ); // dummy node
-		Node startSecondPartition = new Node( 0 ); // dummy node
-		Node firstPartition = startFirstPartition;
-		Node secondPartition = startSecondPartition;
+        Node startFirstPartition = new Node(0); // dummy node
+        Node startSecondPartition = new Node(0); // dummy node
+        Node firstPartition = startFirstPartition;
+        Node secondPartition = startSecondPartition;
 
-		while ( node != null ) {
-			if ( node.data < x ) {
-				firstPartition.next = node;
-				firstPartition = firstPartition.next;
-			}
-			else {
-				secondPartition.next = node;
-				secondPartition = secondPartition.next;
-			}
-			node = node.next;
-		}
+        while (node != null) {
+            if (node.data < x) {
+                firstPartition.next = node;
+                firstPartition = firstPartition.next;
+            } else {
+                secondPartition.next = node;
+                secondPartition = secondPartition.next;
+            }
+            node = node.next;
+        }
 
-		secondPartition.next = null;
-		firstPartition.next = startSecondPartition.next;
-		return startFirstPartition.next;
-	}
+        secondPartition.next = null;
+        firstPartition.next = startSecondPartition.next;
+        return startFirstPartition.next;
+    }
 
 }

@@ -5,7 +5,7 @@ package interviewcake.sortingsearching;
  * I didn't know. I put each word I didn't know at increasing indices in a huge array I created in
  * memory. When I reached the end of the dictionary, I started from the beginning and did the same
  * thing until I reached the page I started at.
- *
+ * <p>
  * Now I have an array of words that are mostly alphabetical, except they start somewhere in the
  * middle of the alphabet, reach the end, and then start from the beginning of the alphabet.
  * Write a method for finding the index of the "rotation point," which is where I started working
@@ -14,63 +14,63 @@ package interviewcake.sortingsearching;
  */
 public class FindRotationPoint {
 
-  public static void main(String[] args) {
-    String[] words = new String[]{
-        "ptolemaic",
-        "retrograde",
-        "supplant",
-        "undulate",
-        "xenoepist",
-        "asymptote",  // <-- rotates here!
-        "babka",
-        "banoffee",
-        "engender",
-        "karpatka",
-        "othellolagkage",
+    public static void main(String[] args) {
+        String[] words = new String[]{
+                "ptolemaic",
+                "retrograde",
+                "supplant",
+                "undulate",
+                "xenoepist",
+                "asymptote",  // <-- rotates here!
+                "babka",
+                "banoffee",
+                "engender",
+                "karpatka",
+                "othellolagkage",
         };
-    System.out.println(findRotationPoint(words, 0, words.length - 1));
+        System.out.println(findRotationPoint(words, 0, words.length - 1));
 
-    // not rotated
-    words = new String[]{
-        "asymptote",
-        "babka",
-        "banoffee",
-        "engender",
-        "karpatka",
-        "othellolagkage",
-        "ptolemaic",
-        "retrograde",
-        "supplant",
-        "undulate",
-        "xenoepist"
-    };
-    System.out.println(findRotationPoint(words, 0, words.length - 1));
-  }
-
-  static int findRotationPoint(String[] words, int start, int end) {
-    if (words == null || words.length == 0) {
-      return -1;
+        // not rotated
+        words = new String[]{
+                "asymptote",
+                "babka",
+                "banoffee",
+                "engender",
+                "karpatka",
+                "othellolagkage",
+                "ptolemaic",
+                "retrograde",
+                "supplant",
+                "undulate",
+                "xenoepist"
+        };
+        System.out.println(findRotationPoint(words, 0, words.length - 1));
     }
 
-    if (start == end) {
-      // we have zoomed in on the rotation point!
-      return start;
-    }
+    static int findRotationPoint(String[] words, int start, int end) {
+        if (words == null || words.length == 0) {
+            return -1;
+        }
 
-    int midPoint = (start + end) / 2;
-    String wordAtMidpoint = words[midPoint];
-    String wordAtStart = words[start];
-    String wordAtEnd = words[end];
+        if (start == end) {
+            // we have zoomed in on the rotation point!
+            return start;
+        }
 
-    if (wordAtMidpoint.compareTo(wordAtStart) < 0) { // is word at midpoint out of order relative
-      // to word at start? then recurse on top half
-      return findRotationPoint(words, start, midPoint);
-    } else if (wordAtMidpoint.compareTo(wordAtEnd) > 0) { // is word at midpoint out of order
-      // relative to word at end? then recurse on bottom half
-      return findRotationPoint(words, midPoint + 1, end);
-    } else {
-      // array isn't rotated
-      return 0;
+        int midPoint = (start + end) / 2;
+        String wordAtMidpoint = words[midPoint];
+        String wordAtStart = words[start];
+        String wordAtEnd = words[end];
+
+        if (wordAtMidpoint.compareTo(wordAtStart) < 0) { // is word at midpoint out of order relative
+            // to word at start? then recurse on top half
+            return findRotationPoint(words, start, midPoint);
+        } else if (wordAtMidpoint.compareTo(wordAtEnd) > 0) { // is word at midpoint out of order
+            // relative to word at end? then recurse on bottom half
+            return findRotationPoint(words, midPoint + 1, end);
+        } else {
+            // array isn't rotated
+            return 0;
+        }
     }
-  }
 }

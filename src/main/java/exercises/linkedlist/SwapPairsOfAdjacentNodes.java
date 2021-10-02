@@ -1,4 +1,3 @@
-
 package exercises.linkedlist;
 
 /**
@@ -13,35 +12,35 @@ package exercises.linkedlist;
  */
 public class SwapPairsOfAdjacentNodes {
 
-	public static void main ( String[] args ) {
-		Node head = new Node( 1 );
-		head.appendToTail( 2 );
-		head.appendToTail( 3 );
-		head.appendToTail( 4 );
-		head.appendToTail( 5 );
+    public static void main(String[] args) {
+        Node head = new Node(1);
+        head.appendToTail(2);
+        head.appendToTail(3);
+        head.appendToTail(4);
+        head.appendToTail(5);
 
-		DeleteMiddleNode.printLinkedList( head );
+        DeleteMiddleNode.printLinkedList(head);
 
-		System.out.println( "----------" );
+        System.out.println("----------");
 
-		head = swapPairsOfAdjacentNodes( head );
+        head = swapPairsOfAdjacentNodes(head);
 
-		DeleteMiddleNode.printLinkedList( head );
+        DeleteMiddleNode.printLinkedList(head);
 
-	}
+    }
 
 
-	public static Node swapPairsOfAdjacentNodes ( Node head ) {
-		if ( head == null || head.next == null )
-			return head;
+    public static Node swapPairsOfAdjacentNodes(Node head) {
+        if (head == null || head.next == null)
+            return head;
 
-		Node second = head.next;
-		Node third = second.next;
+        Node second = head.next;
+        Node third = second.next;
 
-		second.next = head;
-		head.next = swapPairsOfAdjacentNodes( third );
+        second.next = head;
+        head.next = swapPairsOfAdjacentNodes(third);
 
-		return second;
-	}
+        return second;
+    }
 
 }

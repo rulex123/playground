@@ -1,4 +1,3 @@
-
 package exercises.linkedlist;
 
 /**
@@ -11,47 +10,46 @@ package exercises.linkedlist;
  */
 public class RemoveLinkedListElements {
 
-	public static void main ( String[] args ) {
-		Node head = new Node( 6 );
-		head.appendToTail( 2 );
-		head.appendToTail( 6 );
-		head.appendToTail( 3 );
-		head.appendToTail( 4 );
-		head.appendToTail( 5 );
-		head.appendToTail( 6 );
+    public static void main(String[] args) {
+        Node head = new Node(6);
+        head.appendToTail(2);
+        head.appendToTail(6);
+        head.appendToTail(3);
+        head.appendToTail(4);
+        head.appendToTail(5);
+        head.appendToTail(6);
 
-		DeleteMiddleNode.printLinkedList( head );
+        DeleteMiddleNode.printLinkedList(head);
 
-		System.out.println( "----------" );
+        System.out.println("----------");
 
-		head = removeElements( head, 6 );
+        head = removeElements(head, 6);
 
-		DeleteMiddleNode.printLinkedList( head );
+        DeleteMiddleNode.printLinkedList(head);
 
-	}
+    }
 
 
-	public static Node removeElements ( Node head, int value ) {
-		if ( head == null )
-			return null;
+    public static Node removeElements(Node head, int value) {
+        if (head == null)
+            return null;
 
-		Node preHead = new Node( 0 );
-		preHead.next = head;
+        Node preHead = new Node(0);
+        preHead.next = head;
 
-		Node curr = head;
-		Node prev = preHead;
+        Node curr = head;
+        Node prev = preHead;
 
-		while ( curr != null ) {
-			if ( curr.data == value ) {
-				prev.next = curr.next;
-			}
-			else {
-				prev = prev.next;
-			}
-			curr = curr.next;
-		}
+        while (curr != null) {
+            if (curr.data == value) {
+                prev.next = curr.next;
+            } else {
+                prev = prev.next;
+            }
+            curr = curr.next;
+        }
 
-		return preHead.next;
-	}
+        return preHead.next;
+    }
 
 }

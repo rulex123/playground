@@ -1,4 +1,3 @@
-
 package exercises.array;
 
 import java.util.Arrays;
@@ -17,37 +16,36 @@ import java.util.Map;
  */
 public class TwoSum {
 
-	public static void main ( String[] args ) {
-		int[] indices = twoSum( new int[] {
-				2, 11, 15, 7
-		}, 9 );
-		System.out.println( Arrays.toString( indices ) ); // indices 0 and 3
+    public static void main(String[] args) {
+        int[] indices = twoSum(new int[]{
+                2, 11, 15, 7
+        }, 9);
+        System.out.println(Arrays.toString(indices)); // indices 0 and 3
 
-		indices = twoSum( new int[] {
-				3, 4, 1, 2
-		}, 10 );
-		System.out.println( Arrays.toString( indices ) ); // no solution
-	}
+        indices = twoSum(new int[]{
+                3, 4, 1, 2
+        }, 10);
+        System.out.println(Arrays.toString(indices)); // no solution
+    }
 
 
-	public static int[] twoSum ( int[] nums, int target ) {
-		if ( nums == null || nums.length == 0 )
-			return null;
+    public static int[] twoSum(int[] nums, int target) {
+        if (nums == null || nums.length == 0)
+            return null;
 
-		Map<Integer, Integer> numToIndexMap = new HashMap<>();
-		for ( int i = 0; i < nums.length; i++ ) {
-			int complement = target - nums[ i ];
-			if ( numToIndexMap.containsKey( complement ) ) {
-				return new int[] {
-						i, numToIndexMap.get( complement ) // found the only solution
-				};
-			}
-			else {
-				numToIndexMap.put( nums[ i ], i );
-			}
-		}
+        Map<Integer, Integer> numToIndexMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (numToIndexMap.containsKey(complement)) {
+                return new int[]{
+                        i, numToIndexMap.get(complement) // found the only solution
+                };
+            } else {
+                numToIndexMap.put(nums[i], i);
+            }
+        }
 
-		return null; // no solution
-	}
+        return null; // no solution
+    }
 
 }

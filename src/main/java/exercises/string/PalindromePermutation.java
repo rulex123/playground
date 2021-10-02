@@ -1,4 +1,3 @@
-
 package exercises.string;
 
 /**
@@ -14,28 +13,28 @@ package exercises.string;
  */
 public class PalindromePermutation {
 
-	public static void main ( String[] args ) {
-		System.out.println( palindromePermutation( "Tact Coa" ) );
-		System.out.println( palindromePermutation( "Hello There" ) );
-	}
+    public static void main(String[] args) {
+        System.out.println(palindromePermutation("Tact Coa"));
+        System.out.println(palindromePermutation("Hello There"));
+    }
 
 
-	public static boolean palindromePermutation ( String string ) {
+    public static boolean palindromePermutation(String string) {
 
-		// first, make the input string lower case, as we are treating permutations as case-insensitive
-		char[] chars = string.toLowerCase().toCharArray();
+        // first, make the input string lower case, as we are treating permutations as case-insensitive
+        char[] chars = string.toLowerCase().toCharArray();
 
-		int oddCount = 0;
-		Integer[] freqTable = new Integer['z' - 'a' + 1];
-		for ( char c : chars ) {
-			if ( c >= 'a' && c <= 'z' ) {
-				int index = c - 'a';
-				freqTable[ index ] = (freqTable[ index ] == null) ? 1 : (freqTable[ index ] + 1);
-				oddCount = (freqTable[ index ] % 2 == 0) ? (oddCount - 1) : (oddCount + 1);
-			}
-		}
+        int oddCount = 0;
+        Integer[] freqTable = new Integer['z' - 'a' + 1];
+        for (char c : chars) {
+            if (c >= 'a' && c <= 'z') {
+                int index = c - 'a';
+                freqTable[index] = (freqTable[index] == null) ? 1 : (freqTable[index] + 1);
+                oddCount = (freqTable[index] % 2 == 0) ? (oddCount - 1) : (oddCount + 1);
+            }
+        }
 
-		return oddCount <= 1;
-	}
+        return oddCount <= 1;
+    }
 
 }

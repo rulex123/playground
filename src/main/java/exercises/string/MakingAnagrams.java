@@ -1,4 +1,3 @@
-
 package exercises.string;
 
 /**
@@ -15,36 +14,36 @@ package exercises.string;
  */
 public class MakingAnagrams {
 
-	public static void main ( String[] args ) {
-		System.out.println( makingAnagrams( "bacdc", "dcbac" ) );
-		System.out.println( makingAnagrams( "cde", "abc" ) );
-		System.out.println( makingAnagrams( "bananas", "banano" ) );
-		System.out.println( makingAnagrams( "xeno", "eonx" ) );
-		System.out.println( makingAnagrams( "abc", "deccbb" ) );
-	}
+    public static void main(String[] args) {
+        System.out.println(makingAnagrams("bacdc", "dcbac"));
+        System.out.println(makingAnagrams("cde", "abc"));
+        System.out.println(makingAnagrams("bananas", "banano"));
+        System.out.println(makingAnagrams("xeno", "eonx"));
+        System.out.println(makingAnagrams("abc", "deccbb"));
+    }
 
 
-	public static int makingAnagrams ( String a, String b ) {
-		if ( (a == null || a.isEmpty()) || (b == null || b.isEmpty()) )
-			return 0;
+    public static int makingAnagrams(String a, String b) {
+        if ((a == null || a.isEmpty()) || (b == null || b.isEmpty()))
+            return 0;
 
-		int[] lettersCount = new int[26]; // 26 letters from 'a' to 'z'
-		for ( char c : a.toCharArray() ) {
-			lettersCount[ c - 'a' ]++;
-		}
+        int[] lettersCount = new int[26]; // 26 letters from 'a' to 'z'
+        for (char c : a.toCharArray()) {
+            lettersCount[c - 'a']++;
+        }
 
-		int charsToSubtractToMakeAnagrams = a.length();
-		for ( char c : b.toCharArray() ) {
-			int index = c - 'a';
-			if ( lettersCount[ index ] > 0 )
-				charsToSubtractToMakeAnagrams--;
-			else
-				charsToSubtractToMakeAnagrams++;
+        int charsToSubtractToMakeAnagrams = a.length();
+        for (char c : b.toCharArray()) {
+            int index = c - 'a';
+            if (lettersCount[index] > 0)
+                charsToSubtractToMakeAnagrams--;
+            else
+                charsToSubtractToMakeAnagrams++;
 
-			lettersCount[ index ]--;
-		}
+            lettersCount[index]--;
+        }
 
-		return charsToSubtractToMakeAnagrams;
-	}
+        return charsToSubtractToMakeAnagrams;
+    }
 
 }

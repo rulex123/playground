@@ -1,4 +1,3 @@
-
 package exercises.bitmanipulation;
 
 /**
@@ -11,23 +10,23 @@ package exercises.bitmanipulation;
  * @version 1.0 Jul 11, 2017
  */
 public class Insertion {
-	private static final int BITS_IN_INT = 32;
+    private static final int BITS_IN_INT = 32;
 
-	public static void main ( String[] args ) {
-		int newNumber = insertion( 0b10000000000, 0b10011, 2, 6 );
-		System.out.println( Integer.toBinaryString( newNumber ) ); // expected 10001001100
-	}
+    public static void main(String[] args) {
+        int newNumber = insertion(0b10000000000, 0b10011, 2, 6);
+        System.out.println(Integer.toBinaryString(newNumber)); // expected 10001001100
+    }
 
 
-	public static int insertion ( int originalNumber, int numberToInsert, int fromBit, int toBit ) {
-		// we need to clear the bits in originalNumber from i (inclusive) to j (inclusive), so
-		// we build a mask where all bits between i and j are zeros, and the rest of the bits are set
-		int leftPart = ~0 << (toBit + 1);
-		int rightPart = ~0 >>> (BITS_IN_INT - fromBit); // alternatively, rightPart = (1 << fromBit)- 1;
-		int mask = leftPart | rightPart;
-		int originalNumberWithClearedBits = originalNumber & mask; // clear bits between i and j in originalNumber
+    public static int insertion(int originalNumber, int numberToInsert, int fromBit, int toBit) {
+        // we need to clear the bits in originalNumber from i (inclusive) to j (inclusive), so
+        // we build a mask where all bits between i and j are zeros, and the rest of the bits are set
+        int leftPart = ~0 << (toBit + 1);
+        int rightPart = ~0 >>> (BITS_IN_INT - fromBit); // alternatively, rightPart = (1 << fromBit)- 1;
+        int mask = leftPart | rightPart;
+        int originalNumberWithClearedBits = originalNumber & mask; // clear bits between i and j in originalNumber
 
-		return originalNumberWithClearedBits | (numberToInsert << fromBit); // inserting into original number
-	}
+        return originalNumberWithClearedBits | (numberToInsert << fromBit); // inserting into original number
+    }
 
 }

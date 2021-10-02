@@ -1,4 +1,3 @@
-
 package exercises.array;
 
 /**
@@ -10,28 +9,28 @@ package exercises.array;
  */
 public class MaximumSubarray {
 
-	public static void main ( String[] args ) {
-		int[] array = new int[] {
-				-2, 1, -3, 4, -1, 2, 1, -5, 4
-		};
+    public static void main(String[] args) {
+        int[] array = new int[]{
+                -2, 1, -3, 4, -1, 2, 1, -5, 4
+        };
 
-		System.out.println( maximumSubarray( array ) );
-	}
+        System.out.println(maximumSubarray(array));
+    }
 
 
-	public static int maximumSubarray ( int[] array ) {
-		if ( array == null || array.length == 0 )
-			return 0;
+    public static int maximumSubarray(int[] array) {
+        if (array == null || array.length == 0)
+            return 0;
 
-		int maxEndingHere = array[ 0 ];
-		int maxSoFar = array[ 0 ];
+        int maxEndingHere = array[0];
+        int maxSoFar = array[0];
 
-		for ( int i = 1; i < array.length; i++ ) {
-			maxEndingHere = Math.max( maxEndingHere + array[ i ], array[ i ] );
-			maxSoFar = Math.max( maxEndingHere, maxSoFar );
-		}
+        for (int i = 1; i < array.length; i++) {
+            maxEndingHere = Math.max(maxEndingHere + array[i], array[i]);
+            maxSoFar = Math.max(maxEndingHere, maxSoFar);
+        }
 
-		return maxSoFar;
-	}
+        return maxSoFar;
+    }
 
 }

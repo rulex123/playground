@@ -1,4 +1,3 @@
-
 package exercises.string;
 
 /**
@@ -13,43 +12,42 @@ package exercises.string;
  */
 public class URLify {
 
-	public static void main ( String[] args ) {
-		String s = "Mr John Smith    ";
-		char[] chars = s.toCharArray();
-		urlify( chars, 13 );
-		System.out.println( new String( chars ) );
+    public static void main(String[] args) {
+        String s = "Mr John Smith    ";
+        char[] chars = s.toCharArray();
+        urlify(chars, 13);
+        System.out.println(new String(chars));
 
-		s = "Urlify this as well please!        ";
-		chars = s.toCharArray();
-		urlify( chars, 27 );
-		System.out.println( new String( chars ) );
-	}
+        s = "Urlify this as well please!        ";
+        chars = s.toCharArray();
+        urlify(chars, 27);
+        System.out.println(new String(chars));
+    }
 
 
-	public static void urlify ( char[] input, int trueLength ) {
-		int spaceCount = 0;
+    public static void urlify(char[] input, int trueLength) {
+        int spaceCount = 0;
 
-		// determine how many spaces there are in char array
-		for ( int i = 0; i < trueLength; i++ ) {
-			if ( input[ i ] == ' ' )
-				spaceCount++;
-		}
+        // determine how many spaces there are in char array
+        for (int i = 0; i < trueLength; i++) {
+            if (input[i] == ' ')
+                spaceCount++;
+        }
 
-		// determine index at which to start writing into char array
-		int index = (trueLength + spaceCount * 2) - 1;
+        // determine index at which to start writing into char array
+        int index = (trueLength + spaceCount * 2) - 1;
 
-		for ( int i = trueLength - 1; i >= 0; i-- ) {
-			if ( input[ i ] == ' ' ) {
-				input[ index ] = '0';
-				input[ index - 1 ] = '2';
-				input[ index - 2 ] = '%';
-				index -= 3;
-			}
-			else {
-				input[ index ] = input[ i ];
-				index--;
-			}
-		}
-	}
+        for (int i = trueLength - 1; i >= 0; i--) {
+            if (input[i] == ' ') {
+                input[index] = '0';
+                input[index - 1] = '2';
+                input[index - 2] = '%';
+                index -= 3;
+            } else {
+                input[index] = input[i];
+                index--;
+            }
+        }
+    }
 
 }
