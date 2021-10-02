@@ -10,12 +10,12 @@ package exercises.string;
 public class CheckPermutation {
 
 	public static void main ( String[] args ) {
-		System.out.println( checkPermuation( "god", "dog" ) );
-		System.out.println( checkPermuation( "clock", "table" ) );
+		System.out.println( checkPermutation( "god", "dog" ) );
+		System.out.println( checkPermutation( "clock", "table" ) );
 	}
 
 
-	public static boolean checkPermuation ( String a, String b ) {
+	public static boolean checkPermutation(String a, String b ) {
 		if ( a.length() != b.length() )
 			return false; // two strings cannot be permutations of each other if they have different lengths
 
