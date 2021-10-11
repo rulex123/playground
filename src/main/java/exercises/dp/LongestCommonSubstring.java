@@ -1,7 +1,7 @@
-package exercises.arraysandstrings;
+package exercises.dp;
 
 /**
- * Given two strings, write a function that returns the longest common substrings.
+ * Given two strings, write a function that returns the longest common substring.
  * e.g. longestSubstring("ABAB","BABA") = "ABA"
  */
 public class LongestCommonSubstring {

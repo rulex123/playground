@@ -3,7 +3,7 @@ package exercises.arraysandstrings;
 import java.util.*;
 
 /**
- * Given a list of string, write a function to get the kth most frequently occurring string.
+ * Given a list of strings, write a function to get the kth most frequently occurring string.
  */
 public class KthMostFrequentString {
 

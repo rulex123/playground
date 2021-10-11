@@ -30,15 +30,11 @@ public class MaximumSubarrayOfNonAdjacentElements {
         int temp = 0;
         for (int i = 1; i < array.length; i++) {
             temp = bestIfInclusive;
-            bestIfInclusive = Math.max(array[i] + bestIfExclusive, bestIfInclusive);
-            bestIfExclusive = temp;
+            bestIfInclusive = array[i] + bestIfExclusive;
+            bestIfExclusive = Math.max(temp, bestIfExclusive);
         }
 
         return Math.max(bestIfInclusive, bestIfExclusive);
     }
-
-    // i = 1, bestIfInclusive = 4, temp = 4, bestIfInclusive = max(1 + 0, 4), bestIfExclusive = 4
-    // i = 2, temp = 4, bestIfInclusive =
-
 
 }

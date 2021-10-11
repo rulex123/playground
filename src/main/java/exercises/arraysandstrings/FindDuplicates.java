@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Given an array of integers where each value is a<= x <=len(array), write a function that finds all the duplicates in
+ * Given an array of integers where each value is 1<=x<=len(array), write a function that finds all the duplicates in
  * the array
  *
  * @author emanno

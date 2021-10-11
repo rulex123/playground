@@ -9,50 +9,59 @@ package exercises.arraysandstrings;
 public class LongestSubstringThatIsAPalindrome {
 
     public static void main(String[] args) {
-        System.out.println(longestSubstringThatIsAPalindrome_bruteForce("bananas"));
-
-        System.out.println(longestSubstringThatIsAPalindrome_dynamicProgramming("bananas"));
-
+        System.out.println(longestPalindromeSubstring("bananas"));
+        System.out.println(longestPalindromeSubstring("baddad"));
+        System.out.println(longestPalindromeSubstring("abcdef"));
+        System.out.println(longestPalindromeSubstring("abcdeefghi"));
+        System.out.println(longestPalindromeSubstring("stannats"));
     }
 
 
-    public static String longestSubstringThatIsAPalindrome_dynamicProgramming(String string) {
-        if (string == null || string.isEmpty())
-            return string;
+    static String longestPalindromeSubstring(String s) {
+        if (s == null || s.isEmpty())
+            return "";
 
-        int stringLength = string.length();
-        int startIndex = -1;
-        int longestPalindromeLength = -1;
-        boolean[][] palindromes = new boolean[stringLength][stringLength];
+        int palStartAt = 0;
+        int palEndAt = 0;
 
-        // populate matrix for substrings of length 1
-        for (int i = 0; i < palindromes.length; i++) {
-            palindromes[i][i] = true;
-            startIndex = i;
-            longestPalindromeLength = 1;
-        }
+        // look for palindrome substrings of odd size (they expand out from one character)
+        for (int i = 1; i < s.length(); i++) {
+            int from = i - 1;
+            int to = i + 1;
+            int[] palIndices = expandOut(s, from, to);
 
-        // populate matrix for substrings of length 2
-        for (int i = 0; i < palindromes.length - 1; i++) {
-            if (string.charAt(i) == string.charAt(i + 1)) {
-                palindromes[i][i + 1] = true;
-                startIndex = i;
-                longestPalindromeLength = 2;
-            }
-        }
-
-        // populate matrix for substrings of length > 2
-        for (int i = 2; i < palindromes.length; i++) {
-            for (int j = 0; j < palindromes.length - i; j++) {
-                if (string.charAt(j) == string.charAt(i) && palindromes[j + 1][i - 1] == true) {
-                    palindromes[j][i] = true;
-                    startIndex = j;
-                    longestPalindromeLength = i - j + 1;
+            if (palIndices != null) {
+                // check if we found a LONGER palindrome substring
+                if (palIndices[1] - palIndices[0] > palEndAt - palStartAt) {
+                    palStartAt = palIndices[0];
+                    palEndAt = palIndices[1];
                 }
             }
         }
 
-        return string.substring(startIndex, startIndex + longestPalindromeLength);
+        // look for palindrome substrings of even size (expand out from a pair of identical characters)
+        for (int i = 0; i < s.length() - 1; i++) {
+            if (s.charAt(i) == s.charAt(i + 1)) { // check if we have a pair of contiguous identical characters
+                if (palEndAt - palStartAt < 1) {
+                    palStartAt = i;
+                    palEndAt = i + 1;
+                }
+
+                int from = i - 1;
+                int to = i + 2;
+                int[] palIndices = expandOut(s, from, to);
+
+                if (palIndices != null) {
+                    // check if we found a LONGER palindrome substring
+                    if (palIndices[1] - palIndices[0] > palEndAt - palStartAt) {
+                        palStartAt = palIndices[0];
+                        palEndAt = palIndices[1];
+                    }
+                }
+            }
+        }
+
+        return s.substring(palStartAt, palEndAt + 1);
     }
 
 
@@ -90,6 +99,24 @@ public class LongestSubstringThatIsAPalindrome {
         }
 
         return true;
+    }
+
+    private static int[] expandOut(String string, int startIndex, int endIndex) {
+        int[] palindromeIndices = null;
+
+        while (startIndex >= 0 && endIndex < string.length()) {
+            char c1 = string.charAt(startIndex);
+            char c2 = string.charAt(endIndex);
+
+            if (c1 == c2) {
+                palindromeIndices = new int[]{startIndex, endIndex};
+                startIndex--;
+                endIndex++;
+            } else {
+                break;
+            }
+        }
+        return palindromeIndices;
     }
 
 }

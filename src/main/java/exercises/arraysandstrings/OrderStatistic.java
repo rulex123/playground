@@ -11,7 +11,7 @@ import java.util.List;
 public class OrderStatistic {
 
     public static void main(String[] args) {
-        int[] array = {6, 9, 1, 35, 7, 2, 14, 0}; // sorted: 1, 2, 6, 7, 9, 14
+        int[] array = {6, 9, 1, 35, 7, 2, 14}; // sorted: 1, 2, 6, 7, 9, 14, 35
 
         System.out.println(orderStatistic(array, 1));
         System.out.println(orderStatistic(array, 2));

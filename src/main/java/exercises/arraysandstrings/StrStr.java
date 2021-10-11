@@ -10,9 +10,10 @@ package exercises.arraysandstrings;
 public class StrStr {
 
     public static void main(String[] args) {
-        System.out.println(strStr("the cat is under the table", "cat"));
-        System.out.println(strStr("the dog is under the table", "cat"));
-        System.out.println(strStr("aaS", "aS"));
+        System.out.println(strStr("the carpet is under the table", "cat"));
+//        System.out.println(strStr("the cat is under the table", "cat"));
+//        System.out.println(strStr("the dog is under the table", "cat"));
+//        System.out.println(strStr("aaS", "aS"));
     }
 
 

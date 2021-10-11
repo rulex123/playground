@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Given an array A of length n such that it contains only 0s and 1s. The task is to divide the
  * array into THREE different non-empty parts such that all of these parts represent the same binary
- * value(in decimals). If it is possible, return any [i, j] with i+1 < j, such that: 1. A[0], A[1],
+ * value (in decimals). If it is possible, return any [i, j] with i+1 < j, such that: 1. A[0], A[1],
  * ..., A[i] is the first part. 2. A[i+1], A[i+2], ..., A[j-1] is the second part. 3. A[j], A[j+1], ...,
  * A[n- 1] is the third part. Note: All three parts should have equal binary value. However, If it
  * is not possible, return [-1, -1].
